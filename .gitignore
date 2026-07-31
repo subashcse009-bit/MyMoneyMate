@@ -16,3 +16,9 @@
 *.targets
 *.v2
 *.bin
+*.config
+*.dll
+*.exe
+*.pdb
+*.Up2Date
+*.BuildWithSkipAnalyzers
