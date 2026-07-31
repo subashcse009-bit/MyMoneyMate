@@ -1,0 +1,6 @@
+@MyMoneyMate.API_HostAddress = http://localhost:5241
+
+GET {{MyMoneyMate.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
