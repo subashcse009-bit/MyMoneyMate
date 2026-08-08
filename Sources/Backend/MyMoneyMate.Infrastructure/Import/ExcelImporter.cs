@@ -38,9 +38,9 @@ namespace MyMoneyMate.Infrastructure.Import
                         TransactionDate = sheet.Cells[row, 1].Text,
                         Description = sheet.Cells[row, 2].Text,
                         IncomeAmount = sheet.Cells[row, 3].Text,
-                        ExpenseAmount = sheet.Cells[row, 3].Text,
-                        Category = sheet.Cells[row, 4].Text,
-                        Account = sheet.Cells[row, 5].Text
+                        ExpenseAmount = sheet.Cells[row, 4].Text,
+                        Category = sheet.Cells[row, 5].Text,
+                        Account = sheet.Cells[row, 6].Text
                     });
             }
 

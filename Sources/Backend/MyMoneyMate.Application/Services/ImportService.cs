@@ -10,11 +10,11 @@ namespace MyMoneyMate.Application.Services
 {
     public class ImportService
     {
-        private readonly IExcelImporter _excelImporter;
+        private readonly IImporter _excelImporter;
 
         private readonly ITransactionStageRepository _repository;
 
-        public ImportService(IExcelImporter excelImporter, ITransactionStageRepository repository)
+        public ImportService(IImporter excelImporter, ITransactionStageRepository repository)
         {
             _excelImporter = excelImporter;
             _repository = repository;
