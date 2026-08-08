@@ -11,6 +11,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="EPPlus" Version="8.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\MyMoneyMate.Domain\MyMoneyMate.Domain.csproj" />
   </ItemGroup>
 
