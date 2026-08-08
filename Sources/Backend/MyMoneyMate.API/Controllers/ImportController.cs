@@ -17,7 +17,7 @@ public class ImportController : ControllerBase
     {
         using var stream = file.OpenReadStream();
 
-        var batchId = await _service.ImportAsync(stream);
+        var batchId = await _service.ImportAsync(stream, file.FileName);
 
         return Ok(new
         {

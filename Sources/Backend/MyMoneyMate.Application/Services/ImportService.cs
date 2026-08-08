@@ -10,39 +10,34 @@ namespace MyMoneyMate.Application.Services
 {
     public class ImportService
     {
-        private readonly IImporter _excelImporter;
-
+        private readonly IEnumerable<IImporter> _importers;
         private readonly ITransactionStageRepository _repository;
 
-        public ImportService(IImporter excelImporter, ITransactionStageRepository repository)
+        public ImportService(IEnumerable<IImporter> importers, ITransactionStageRepository repository)
         {
-            _excelImporter = excelImporter;
+            _importers = importers;
             _repository = repository;
         }
 
-        public async Task<Guid> ImportAsync(Stream stream)
+        public async Task<Guid> ImportAsync(Stream stream, string fileName, string? contentType = null)
         {
             var batchId = Guid.NewGuid();
 
-            var rows =
-                _excelImporter.ReadTransactions(stream);
+            var importer = _importers.FirstOrDefault(i => i.CanImport(fileName, contentType));
+            if (importer == null) throw new InvalidOperationException("No importer available for the provided file type.");
+
+            var rows = importer.ReadTransactions(stream);
 
             foreach (var row in rows)
             {
                 var stage = new TransactionStaging
                 {
-                    TransactionDate =
-                        row.TransactionDate,
-                    Description =
-                        row.Description,
-                    IncomeAmount =
-                        row.IncomeAmount,
-                    ExpenseAmount =
-                        row.ExpenseAmount,
-                    CategoryName =
-                        row.Category,
-                    AccountName =
-                        row.Account
+                    TransactionDate = row.TransactionDate,
+                    Description = row.Description,
+                    IncomeAmount = row.IncomeAmount,
+                    ExpenseAmount = row.ExpenseAmount,
+                    CategoryName = row.Category,
+                    AccountName = row.Account
                 };
 
                 await _repository.SaveAsync(stage);
