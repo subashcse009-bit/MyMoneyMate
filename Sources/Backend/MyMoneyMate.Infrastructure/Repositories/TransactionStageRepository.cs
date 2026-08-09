@@ -22,41 +22,43 @@ namespace MyMoneyMate.Infrastructure.Repositories
         public async Task SaveAsync(TransactionStaging entity)
         {
             const string sql = @"
-                INSERT INTO TransactionStage
-                (
-                 StageId,
-                 BatchId,
-                 TransactionDate,
-                 Description,
-                 Amount,
-                 Category,
-                 Account,
-                 Status
-                )
-                VALUES
-                (
-                 @StageId,
-                 @BatchId,
-                 @TransactionDate,
-                 @Description,
-                 @Amount,
-                 @Category,
-                 @Account,
-                 @Status
-                )";
+        INSERT INTO TransactionStaging
+        (
+            ImportBatchDetailID,
+            TransactionDate,
+            AccountName,
+            CategoryName,
+            Description,
+            PaymentMode,
+            ExpenseAmount,
+            IncomeAmount
+        )
+        VALUES
+        (
+            @ImportBatchDetailID,
+            @TransactionDate,
+            @AccountName,
+            @CategoryName,
+            @Description,
+            @PaymentMode,
+            @ExpenseAmount,
+            @IncomeAmount
+        )";
 
             using var connection = _factory.Create();
-
             await connection.OpenAsync();
 
             using var command = new SqlCommand(sql, connection);
 
-            command.Parameters.AddWithValue("@TransactionDate", entity.TransactionDate);
-            command.Parameters.AddWithValue("@Description", entity.Description);
+            command.Parameters.AddWithValue("@ImportBatchDetailID", entity.ImportBatchDetailID);
+            command.Parameters.AddWithValue("@TransactionDate", entity.TransactionDate );
+            command.Parameters.AddWithValue("@AccountName", entity.AccountName ?? string.Empty);
+            command.Parameters.AddWithValue("@CategoryName", entity.CategoryName ?? string.Empty);
+            command.Parameters.AddWithValue("@Description", entity.Description ?? string.Empty);
+            command.Parameters.AddWithValue("@PaymentMode", entity.PaymentMode ?? string.Empty);
+            command.Parameters.AddWithValue("@ExpenseAmount", entity.ExpenseAmount );
             command.Parameters.AddWithValue("@IncomeAmount", entity.IncomeAmount);
-            command.Parameters.AddWithValue("@ExpenseAmount", entity.ExpenseAmount);
-            command.Parameters.AddWithValue("@Category", entity.CategoryName);
-            command.Parameters.AddWithValue("@Account", entity.AccountName);
+
             await command.ExecuteNonQueryAsync();
         }
 

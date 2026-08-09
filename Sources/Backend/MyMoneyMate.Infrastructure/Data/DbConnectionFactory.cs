@@ -14,7 +14,7 @@ namespace MyMoneyMate.Infrastructure.Data
 
         public DbConnectionFactory(IConfiguration configuration)
         {
-            _connectionString = configuration.GetConnectionString("Default");
+            _connectionString = configuration.GetConnectionString("DefaultConnection");
         }
 
         public SqlConnection Create()

@@ -8,11 +8,11 @@ namespace MyMoneyMate.Application.DTO
 {
     public class TransactionImportRow
     {
-        public string TransactionDate { get;set;  } = string.Empty;
-        public string Account { get;set;  } = string.Empty;
+        public DateTime TransactionDate { get; set; }
+        public string Account { get; set; } = string.Empty;
         public string Category { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
-        public string IncomeAmount { get; set; } = string.Empty;
-        public string ExpenseAmount { get; set; } = string.Empty;
+        public decimal IncomeAmount { get; set; } = 0m;
+        public decimal ExpenseAmount { get; set; } = 0m;
     }
 }

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace MyMoneyMate.Application.Import
 {
@@ -22,7 +23,7 @@ namespace MyMoneyMate.Application.Import
         public IEnumerable<TransactionImportRow> ReadTransactions(Stream stream)
         {
             var rows = new List<TransactionImportRow>();
-
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             using var package = new ExcelPackage(stream);
             var sheet = package.Workbook.Worksheets[0];
             var rowCount = sheet.Dimension.Rows;
@@ -31,10 +32,10 @@ namespace MyMoneyMate.Application.Import
             {
                 rows.Add(new TransactionImportRow
                 {
-                    TransactionDate = sheet.Cells[row, 1].Text,
+                    TransactionDate = DateTime.Parse(sheet.Cells[row, 1].Text),
                     Description = sheet.Cells[row, 2].Text,
-                    IncomeAmount = sheet.Cells[row, 3].Text,
-                    ExpenseAmount = sheet.Cells[row, 4].Text,
+                    IncomeAmount = decimal.Parse(sheet.Cells[row, 3].Text),
+                    ExpenseAmount = decimal.Parse(sheet.Cells[row, 4].Text),
                     Category = sheet.Cells[row, 5].Text,
                     Account = sheet.Cells[row, 6].Text
                 });

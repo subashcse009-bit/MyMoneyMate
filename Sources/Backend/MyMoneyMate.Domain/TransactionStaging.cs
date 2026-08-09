@@ -14,14 +14,14 @@ namespace MyMoneyMate.Domain
         [Required]
         public int ImportBatchDetailID { get; set; }
         [Required]
-        public string TransactionDate { get; set; }
+        public DateTime TransactionDate { get; set; }
         [Required]
         public string AccountName { get; set; }
         [Required]
         public string CategoryName { get; set; }
         public string Description { get; set; }
         public string PaymentMode { get; set; }
-        public string ExpenseAmount { get; set; }
-        public string IncomeAmount { get; set; }
+        public decimal ExpenseAmount { get; set; }
+        public decimal IncomeAmount { get; set; }
     }
 }
