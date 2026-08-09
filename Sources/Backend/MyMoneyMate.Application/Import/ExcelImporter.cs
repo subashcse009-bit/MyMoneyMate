@@ -32,10 +32,10 @@ namespace MyMoneyMate.Application.Import
             {
                 rows.Add(new TransactionImportRow
                 {
-                    TransactionDate = DateTime.Parse(sheet.Cells[row, 1].Text),
+                    TransactionDate = DateTime.TryParse(sheet.Cells[row, 1].Text, out var transactionDate) ? transactionDate : DateTime.MinValue,
                     Description = sheet.Cells[row, 2].Text,
-                    IncomeAmount = decimal.Parse(sheet.Cells[row, 3].Text),
-                    ExpenseAmount = decimal.Parse(sheet.Cells[row, 4].Text),
+                    IncomeAmount = decimal.TryParse(sheet.Cells[row, 3].Text, out var incomeAmount) ? incomeAmount : 0m,
+                    ExpenseAmount = decimal.TryParse(sheet.Cells[row, 4].Text, out var expenseAmount) ? expenseAmount : 0m,
                     Category = sheet.Cells[row, 5].Text,
                     Account = sheet.Cells[row, 6].Text
                 });
