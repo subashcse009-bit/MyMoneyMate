@@ -13,7 +13,7 @@ namespace MyMoneyMate.Infrastructure
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<ImportBatch> ImportBatch { get; set; }
-        public DbSet<ImportBatchDetails> ImportBatchDetails { get; set; }
+        public DbSet<ImportBatchDetail> ImportBatchDetails { get; set; }
         public DbSet<TransactionStaging> TransactionStaging { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
 
