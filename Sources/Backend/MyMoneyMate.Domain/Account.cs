@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace MyMoneyMate.Domain
 {
+    //HDFC, SBI, Cash, Investment
     public class Account
     {
         [Key]

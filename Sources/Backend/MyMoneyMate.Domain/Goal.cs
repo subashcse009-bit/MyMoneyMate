@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace MyMoneyMate.Domain
 {
-    public class InvestmentDetail
+    //School Fees, Retirement, Home
+    public class Goal
     {
-        public int InvestmentDetailId { get; set; }
-        public int InvestmentId { get; set; }
-        // HDFC Flexi Cap Fund
-        public string InvestmentDetailName { get; set; }
-        public string Description { get; set; }
-        public string Notes { get; set; }
+        public int GoldId {  get; set; }
+        public string GoalName {  get; set; }
+        //Short-Term, Mid-Term, Long-Term
+        public string GoalType { get; set; }
+        public string Description {  get; set; }
         public DateOnly StartDate { get; set; }
         public DateOnly EndDate { get; set; }
         public int StatusID { get; set; }

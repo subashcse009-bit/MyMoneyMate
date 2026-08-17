@@ -10,6 +10,7 @@ namespace MyMoneyMate.Domain
     {
         public int MonthlyPlanId { get; set; }
         public DateTime MonthDate {  get; set; }
+        //Investment, Cash, Rent, Grocessory
         public string PlanName { get; set; }
         public string Description { get; set; }
         public string Notes { get; set; }

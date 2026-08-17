@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace MyMoneyMate.Domain
 {
+    //Rent, EMI,Loan
     public class Category
     {
         [Key]
@@ -14,8 +15,10 @@ namespace MyMoneyMate.Domain
         [Required]
         public string CategoryName { get; set; }
         [Required]
+        //Need Savings, Want
         public int NSWID { get; set; }
         [Required]
+        //Operating Expense,Investment
         public string TransactionTypeID { get; set; }
         [Required]
         public decimal Budget { get; set; }
