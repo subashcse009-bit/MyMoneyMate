@@ -3,7 +3,7 @@ using MyMoneyMate.Domain;
 
 namespace MyMoneyMate.Infrastructure
 {
-    public class MyMoneyMateDBContext: DbContext
+    public class MyMoneyMateDBContext : DbContext
     {
         public MyMoneyMateDBContext(DbContextOptions<MyMoneyMateDBContext> options) : base(options)
         {
@@ -31,7 +31,22 @@ namespace MyMoneyMate.Infrastructure
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Account>().HasData(
-                new Account { AccountID = 1, AccountName = "HDFC", AccountType = "Bank", DisplayOrder = 1, IsActive = true, OpeningBalance = 104847.59M }
+                new Account
+                {
+                    AccountID = 1,
+                    AccountName = "HDFC",
+                    AccountType = "Bank",
+                    OpeningBalance = 104847.59M,
+                    CreditLimit = 0,
+                    DisplayOrder = 1,
+                    StatusID = 0,
+                    StatusCode = "ACTV",
+                    CreatedBy = "System",
+                    CreatedDate = new DateTime(2026, 3, 1),
+                    ModifiedBy = "System",
+                    ModifiedDate = new DateTime(2026, 3, 1),
+                    UpdateSeq = 1
+                }
             );
         }
     }

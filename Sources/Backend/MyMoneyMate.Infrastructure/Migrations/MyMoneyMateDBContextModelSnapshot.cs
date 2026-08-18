@@ -38,17 +38,38 @@ namespace MyMoneyMate.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<decimal>("CreditLimit")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("DisplayOrder")
                         .HasColumnType("int");
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
+                    b.Property<string>("ModifiedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<decimal>("OpeningBalance")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("StatusCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("StatusID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UpdateSeq")
+                        .HasColumnType("int");
 
                     b.HasKey("AccountID");
 
@@ -60,10 +81,16 @@ namespace MyMoneyMate.Infrastructure.Migrations
                             AccountID = 1,
                             AccountName = "HDFC",
                             AccountType = "Bank",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2026, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreditLimit = 0m,
                             DisplayOrder = 1,
-                            IsActive = true,
-                            OpeningBalance = 104847.59m
+                            ModifiedBy = "System",
+                            ModifiedDate = new DateTime(2026, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            OpeningBalance = 104847.59m,
+                            StatusCode = "ACTV",
+                            StatusID = 0,
+                            UpdateSeq = 1
                         });
                 });
 
@@ -140,6 +167,16 @@ namespace MyMoneyMate.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("DisplayOrder")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IncludeExpense")
                         .HasColumnType("bit");
 
@@ -149,12 +186,28 @@ namespace MyMoneyMate.Infrastructure.Migrations
                     b.Property<bool>("IncludeSavings")
                         .HasColumnType("bit");
 
+                    b.Property<string>("ModifiedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("NSWID")
                         .HasColumnType("int");
 
-                    b.Property<string>("TransactionTypeID")
+                    b.Property<string>("StatusCode")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("StatusID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TransactionTypeID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UpdateSeq")
+                        .HasColumnType("int");
 
                     b.HasKey("CategoryID");
 
@@ -585,7 +638,7 @@ namespace MyMoneyMate.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateOnly>("EndDate")
+                    b.Property<DateOnly?>("EndDate")
                         .HasColumnType("date");
 
                     b.Property<decimal>("ExpenseAmount")
@@ -604,6 +657,9 @@ namespace MyMoneyMate.Infrastructure.Migrations
                     b.Property<string>("Notes")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ScheduledDay")
+                        .HasColumnType("int");
 
                     b.Property<DateOnly>("StartDate")
                         .HasColumnType("date");

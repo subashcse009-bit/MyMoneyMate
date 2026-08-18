@@ -19,9 +19,15 @@ namespace MyMoneyMate.Domain
         [Required]
         public decimal OpeningBalance {  get; set; }
         public decimal CreditLimit { get; set; }
+        public int DisplayOrder { get; set; } 
         [Required]
-        public bool IsActive { get; set; }
-        public int DisplayOrder {  get; set; }
+        public int StatusID { get; set; }
+        public string StatusCode { get; set; }
+        public string CreatedBy { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public string ModifiedBy { get; set; }
+        public DateTime ModifiedDate { get; set; }
+        public int UpdateSeq { get; set; }
 
     }
 }

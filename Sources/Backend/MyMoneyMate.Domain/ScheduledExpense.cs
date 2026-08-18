@@ -11,12 +11,13 @@ namespace MyMoneyMate.Domain
     {
         [Key]
         public int ScheduledExpenseId { get; set; }
+        public int ScheduledDay { get; set; }
         public int AccountId { get; set; }
         public int CategoryId { get; set; }
         public decimal ExpenseAmount { get; set; }
         public decimal IncomeAmount { get; set; }
         public DateOnly StartDate { get; set; }
-        public DateOnly EndDate { get; set; }
+        public DateOnly? EndDate { get; set; }
         public string Description { get; set; }
         public string Notes { get; set; }
         public int StatusID { get; set; }

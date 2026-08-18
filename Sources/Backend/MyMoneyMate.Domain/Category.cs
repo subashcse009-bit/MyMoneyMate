@@ -19,8 +19,7 @@ namespace MyMoneyMate.Domain
         public int NSWID { get; set; }
         [Required]
         //Operating Expense,Investment
-        public string TransactionTypeID { get; set; }
-        [Required]
+        public int TransactionTypeID { get; set; }
         public decimal Budget { get; set; }
         [Required]
         public bool IncludeExpense { get; set; }
@@ -28,6 +27,14 @@ namespace MyMoneyMate.Domain
         public bool IncludeIncome { get; set; }
         [Required]
         public bool IncludeSavings { get; set; }
+        public int DisplayOrder { get; set; }
+        public int StatusID { get; set; }
+        public string StatusCode { get; set; }
+        public string CreatedBy { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public string ModifiedBy { get; set; }
+        public DateTime ModifiedDate { get; set; }
+        public int UpdateSeq { get; set; }
 
     }
 }
