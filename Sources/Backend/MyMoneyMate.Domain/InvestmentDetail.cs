@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ namespace MyMoneyMate.Domain
 {
     public class InvestmentDetail
     {
+        [Key]
         public int InvestmentDetailId { get; set; }
         public int InvestmentId { get; set; }
         // HDFC Flexi Cap Fund

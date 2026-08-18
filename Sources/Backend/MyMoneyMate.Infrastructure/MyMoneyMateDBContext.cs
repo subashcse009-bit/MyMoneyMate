@@ -11,11 +11,20 @@ namespace MyMoneyMate.Infrastructure
         }
 
         public DbSet<Account> Accounts { get; set; }
+        public DbSet<AccountBudget> AccountBudgets { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<CategoryBudget> CategoryBudgets { get; set; }
+        public DbSet<Codes> Codes { get; set; }
+        public DbSet<CodeValues> CodeValues { get; set; }
         public DbSet<ImportBatch> ImportBatch { get; set; }
         public DbSet<ImportBatchDetail> ImportBatchDetails { get; set; }
-        public DbSet<TransactionStaging> TransactionStaging { get; set; }
+        public DbSet<InvestmentDetail> InvestmentDetails { get; set; }
+        public DbSet<InvestmentDetailHistory> InvestmentDetailHistories { get; set; }
+        public DbSet<InvestmentType> InvestmentTypes { get; set; }
+        public DbSet<MonthlyPlan> MonthlyPlans { get; set; }
+        public DbSet<ScheduledExpense> ScheduledExpenses { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
+        public DbSet<TransactionStaging> TransactionStaging { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

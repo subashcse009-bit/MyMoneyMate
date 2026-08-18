@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ namespace MyMoneyMate.Domain
     //School Fees, Retirement, Home
     public class Goal
     {
+        [Key]
         public int GoldId {  get; set; }
         public string GoalName {  get; set; }
         //Short-Term, Mid-Term, Long-Term

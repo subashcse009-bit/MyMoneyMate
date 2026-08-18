@@ -67,6 +67,64 @@ namespace MyMoneyMate.Infrastructure.Migrations
                         });
                 });
 
+            modelBuilder.Entity("MyMoneyMate.Domain.AccountBudget", b =>
+                {
+                    b.Property<int>("AccountBudgetId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AccountBudgetId"));
+
+                    b.Property<int>("AccountId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("BudgetAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateOnly>("EndDate")
+                        .HasColumnType("date");
+
+                    b.Property<string>("ModifiedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateOnly>("StartDate")
+                        .HasColumnType("date");
+
+                    b.Property<string>("StatusCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StatusID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UpdateSeq")
+                        .HasColumnType("int");
+
+                    b.HasKey("AccountBudgetId");
+
+                    b.ToTable("AccountBudgets");
+                });
+
             modelBuilder.Entity("MyMoneyMate.Domain.Category", b =>
                 {
                     b.Property<int>("CategoryID")
@@ -103,6 +161,154 @@ namespace MyMoneyMate.Infrastructure.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("MyMoneyMate.Domain.CategoryBudget", b =>
+                {
+                    b.Property<int>("CategoryBudgetId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryBudgetId"));
+
+                    b.Property<decimal>("BudgetAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateOnly>("EndDate")
+                        .HasColumnType("date");
+
+                    b.Property<string>("ModifiedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateOnly>("StartDate")
+                        .HasColumnType("date");
+
+                    b.Property<int>("StatusID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("StatusValue")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UpdateSeq")
+                        .HasColumnType("int");
+
+                    b.HasKey("CategoryBudgetId");
+
+                    b.ToTable("CategoryBudgets");
+                });
+
+            modelBuilder.Entity("MyMoneyMate.Domain.CodeValues", b =>
+                {
+                    b.Property<int>("CodeValueId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CodeValueId"));
+
+                    b.Property<int>("CodeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CodeValue")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateOnly>("EndDate")
+                        .HasColumnType("date");
+
+                    b.Property<string>("ModifiedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateOnly>("StartDate")
+                        .HasColumnType("date");
+
+                    b.Property<int>("UpdateSeq")
+                        .HasColumnType("int");
+
+                    b.HasKey("CodeValueId");
+
+                    b.ToTable("CodeValues");
+                });
+
+            modelBuilder.Entity("MyMoneyMate.Domain.Codes", b =>
+                {
+                    b.Property<int>("CodeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CodeId"));
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateOnly>("EndDate")
+                        .HasColumnType("date");
+
+                    b.Property<string>("ModifiedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateOnly>("StartDate")
+                        .HasColumnType("date");
+
+                    b.Property<int>("UpdateSeq")
+                        .HasColumnType("int");
+
+                    b.HasKey("CodeId");
+
+                    b.ToTable("Codes");
+                });
+
             modelBuilder.Entity("MyMoneyMate.Domain.ImportBatch", b =>
                 {
                     b.Property<int>("ImportBatchID")
@@ -136,7 +342,7 @@ namespace MyMoneyMate.Infrastructure.Migrations
                     b.ToTable("ImportBatch");
                 });
 
-            modelBuilder.Entity("MyMoneyMate.Domain.ImportBatchDetails", b =>
+            modelBuilder.Entity("MyMoneyMate.Domain.ImportBatchDetail", b =>
                 {
                     b.Property<int>("ImportBatchDetailID")
                         .ValueGeneratedOnAdd()
@@ -161,6 +367,260 @@ namespace MyMoneyMate.Infrastructure.Migrations
                     b.HasKey("ImportBatchDetailID");
 
                     b.ToTable("ImportBatchDetails");
+                });
+
+            modelBuilder.Entity("MyMoneyMate.Domain.InvestmentDetail", b =>
+                {
+                    b.Property<int>("InvestmentDetailId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InvestmentDetailId"));
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateOnly>("EndDate")
+                        .HasColumnType("date");
+
+                    b.Property<string>("InvestmentDetailName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("InvestmentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ModifiedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateOnly>("StartDate")
+                        .HasColumnType("date");
+
+                    b.Property<int>("StatusID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("StatusValue")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UpdateSeq")
+                        .HasColumnType("int");
+
+                    b.HasKey("InvestmentDetailId");
+
+                    b.ToTable("InvestmentDetails");
+                });
+
+            modelBuilder.Entity("MyMoneyMate.Domain.InvestmentDetailHistory", b =>
+                {
+                    b.Property<int>("InvestmentDetailHistoryID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InvestmentDetailHistoryID"));
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("InvestmentDetailID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ModifiedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UpdateSeq")
+                        .HasColumnType("int");
+
+                    b.HasKey("InvestmentDetailHistoryID");
+
+                    b.ToTable("InvestmentDetailHistories");
+                });
+
+            modelBuilder.Entity("MyMoneyMate.Domain.InvestmentType", b =>
+                {
+                    b.Property<int>("InvestmentTypeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InvestmentTypeId"));
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("InvestmentTypeDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("InvestmentTypeName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ModifiedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("StatusID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("StatusValue")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UpdateSeq")
+                        .HasColumnType("int");
+
+                    b.HasKey("InvestmentTypeId");
+
+                    b.ToTable("InvestmentTypes");
+                });
+
+            modelBuilder.Entity("MyMoneyMate.Domain.MonthlyPlan", b =>
+                {
+                    b.Property<int>("MonthlyPlanId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MonthlyPlanId"));
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ModifiedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("MonthDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PlanName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("StatusID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("StatusValue")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UpdateSeq")
+                        .HasColumnType("int");
+
+                    b.HasKey("MonthlyPlanId");
+
+                    b.ToTable("MonthlyPlans");
+                });
+
+            modelBuilder.Entity("MyMoneyMate.Domain.ScheduledExpense", b =>
+                {
+                    b.Property<int>("ScheduledExpenseId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ScheduledExpenseId"));
+
+                    b.Property<int>("AccountId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateOnly>("EndDate")
+                        .HasColumnType("date");
+
+                    b.Property<decimal>("ExpenseAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("IncomeAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("ModifiedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateOnly>("StartDate")
+                        .HasColumnType("date");
+
+                    b.Property<int>("StatusID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("StatusValue")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UpdateSeq")
+                        .HasColumnType("int");
+
+                    b.HasKey("ScheduledExpenseId");
+
+                    b.ToTable("ScheduledExpenses");
                 });
 
             modelBuilder.Entity("MyMoneyMate.Domain.Transaction", b =>
@@ -221,24 +681,21 @@ namespace MyMoneyMate.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ExpenseAmount")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<decimal>("ExpenseAmount")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("ImportBatchDetailID")
                         .HasColumnType("int");
 
-                    b.Property<string>("IncomeAmount")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<decimal>("IncomeAmount")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("PaymentMode")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("TransactionDate")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("TransactionDate")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("TransactionStagingID");
 

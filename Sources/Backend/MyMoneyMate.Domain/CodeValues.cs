@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ namespace MyMoneyMate.Domain
 {
     public class CodeValues
     {
+        [Key]
         public int CodeValueId { get; set; }
         public int CodeId { get; set; }
         public string CodeValue { get; set; }
