@@ -16,7 +16,7 @@ namespace MyMoneyMate.Domain
         public string Description { get; set; }
         public string Notes { get; set; }
         public DateOnly StartDate { get; set; }
-        public DateOnly EndDate { get; set; }
+        public DateOnly? EndDate { get; set; }
         public int StatusID { get; set; }
         public string StatusValue { get; set; }
         public string CreatedBy { get; set; }

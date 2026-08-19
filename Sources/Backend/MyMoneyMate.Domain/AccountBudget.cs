@@ -14,7 +14,7 @@ namespace MyMoneyMate.Domain
         public int AccountId { get; set; }
         public decimal BudgetAmount { get; set; }
         public DateOnly StartDate { get; set; }
-        public DateOnly EndDate { get; set; }
+        public DateOnly? EndDate { get; set; }
         public string Description { get; set; }
         public string  Notes { get; set; }
         public string StatusID { get; set; }

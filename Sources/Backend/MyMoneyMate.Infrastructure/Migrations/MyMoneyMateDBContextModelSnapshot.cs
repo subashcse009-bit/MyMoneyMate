@@ -89,7 +89,7 @@ namespace MyMoneyMate.Infrastructure.Migrations
                             ModifiedDate = new DateTime(2026, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OpeningBalance = 104847.59m,
                             StatusCode = "ACTV",
-                            StatusID = 0,
+                            StatusID = 1,
                             UpdateSeq = 1
                         });
                 });
@@ -119,7 +119,7 @@ namespace MyMoneyMate.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateOnly>("EndDate")
+                    b.Property<DateOnly?>("EndDate")
                         .HasColumnType("date");
 
                     b.Property<string>("ModifiedBy")
@@ -244,7 +244,7 @@ namespace MyMoneyMate.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateOnly>("EndDate")
+                    b.Property<DateOnly?>("EndDate")
                         .HasColumnType("date");
 
                     b.Property<string>("ModifiedBy")
