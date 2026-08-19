@@ -14,13 +14,12 @@ namespace MyMoneyMate.Domain
         public int CategoryID { get; set; }
         [Required]
         public string CategoryName { get; set; }
-        [Required]
         //Need Savings, Want
-        public int NSWID { get; set; }
-        [Required]
+        public int CategoryNatureID { get; set; }
+        public string CategoryNatureValue { get; set; }
         //Operating Expense,Investment
-        public int TransactionTypeID { get; set; }
-        public decimal Budget { get; set; }
+        public int CategoryGroupID { get; set; }
+        public string CategoryGroupValue { get; set; }
         [Required]
         public bool IncludeExpense { get; set; }
         [Required]

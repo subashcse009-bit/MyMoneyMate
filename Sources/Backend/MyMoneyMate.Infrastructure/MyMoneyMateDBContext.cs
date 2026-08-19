@@ -39,7 +39,7 @@ namespace MyMoneyMate.Infrastructure
                     OpeningBalance = 104847.59M,
                     CreditLimit = 0,
                     DisplayOrder = 1,
-                    StatusID = 0,
+                    StatusID = 1,
                     StatusCode = "ACTV",
                     CreatedBy = "System",
                     CreatedDate = new DateTime(2026, 3, 1),
