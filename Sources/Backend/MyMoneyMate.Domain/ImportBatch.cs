@@ -10,7 +10,7 @@ namespace MyMoneyMate.Domain
     public class ImportBatch
     {
         [Key]
-        public int ImportBatchID {  get; set; }
+        public int ImportBatchId {  get; set; }
         [Required]
         public string FileName {  get; set; }
         [Required]

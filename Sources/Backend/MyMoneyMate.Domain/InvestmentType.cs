@@ -13,7 +13,7 @@ namespace MyMoneyMate.Domain
         public int InvestmentTypeId { get; set; }
         public string InvestmentTypeName { get; set; }
         public string InvestmentTypeDescription { get; set; }
-        public int StatusID { get; set; }
+        public int StatusId { get; set; }
         public string StatusValue { get; set; }
         public string CreatedBy { get; set; }
         public DateTime CreatedDate { get; set; }

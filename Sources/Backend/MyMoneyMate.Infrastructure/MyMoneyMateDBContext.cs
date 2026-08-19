@@ -16,6 +16,7 @@ namespace MyMoneyMate.Infrastructure
         public DbSet<CategoryBudget> CategoryBudgets { get; set; }
         public DbSet<Codes> Codes { get; set; }
         public DbSet<CodeValues> CodeValues { get; set; }
+        public DbSet<Goal> Goals { get; set; }
         public DbSet<ImportBatch> ImportBatch { get; set; }
         public DbSet<ImportBatchDetail> ImportBatchDetails { get; set; }
         public DbSet<InvestmentDetail> InvestmentDetails { get; set; }
@@ -33,14 +34,14 @@ namespace MyMoneyMate.Infrastructure
             modelBuilder.Entity<Account>().HasData(
                 new Account
                 {
-                    AccountID = 1,
+                    AccountId = 1,
                     AccountName = "HDFC",
                     AccountType = "Bank",
                     OpeningBalance = 104847.59M,
                     CreditLimit = 0,
                     DisplayOrder = 1,
-                    StatusID = 1,
-                    StatusCode = "ACTV",
+                    StatusId = 1,
+                    StatusValue = "ACTV",
                     CreatedBy = "System",
                     CreatedDate = new DateTime(2026, 3, 1),
                     ModifiedBy = "System",

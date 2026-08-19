@@ -11,28 +11,40 @@ namespace MyMoneyMate.Domain
     public class Category
     {
         [Key]
-        public int CategoryID { get; set; }
-        [Required]
+        public int CategoryId { get; set; }
+       
         public string CategoryName { get; set; }
+        
         //Need Savings, Want
-        public int CategoryNatureID { get; set; }
-        public string CategoryNatureValue { get; set; }
+        public int? CategoryNatureId { get; set; }
+        
+        public string? CategoryNatureValue { get; set; }
+        
         //Operating Expense,Investment
-        public int CategoryGroupID { get; set; }
-        public string CategoryGroupValue { get; set; }
-        [Required]
+        public int? CategoryGroupId { get; set; }
+        
+        public string? CategoryGroupValue { get; set; }
+        
         public bool IncludeExpense { get; set; }
-        [Required]
+        
         public bool IncludeIncome { get; set; }
-        [Required]
+        
         public bool IncludeSavings { get; set; }
+        
         public int DisplayOrder { get; set; }
-        public int StatusID { get; set; }
-        public string StatusCode { get; set; }
+        
+        public int? StatusId { get; set; }
+        
+        public string? StatusValue { get; set; }
+        
         public string CreatedBy { get; set; }
+        
         public DateTime CreatedDate { get; set; }
+        
         public string ModifiedBy { get; set; }
+        
         public DateTime ModifiedDate { get; set; }
+        
         public int UpdateSeq { get; set; }
 
     }
