@@ -3,7 +3,7 @@ BEGIN
     INSERT INTO dbo.Categories (CategoryName, NSWID ,TransactionTypeID ,Budget ,IncludeExpense ,IncludeIncome, IncludeSavings
            ,DisplayOrder, StatusID, StatusCode, CreatedBy, CreatedDate, ModifiedBy, ModifiedDate, UpdateSeq)
     VALUES ('Daily Expense', 1, 1,22000, 1, 0, 0,
-        1, 0, 'ACTV', 'System', GETDATE(), 'System', GETDATE(), 1);
+        1, 1, 'ACTV', 'System', GETDATE(), 'System', GETDATE(), 1);
 END
 GO
 
@@ -12,7 +12,7 @@ BEGIN
     INSERT INTO dbo.Categories (CategoryName, NSWID ,TransactionTypeID ,Budget ,IncludeExpense ,IncludeIncome, IncludeSavings
            ,DisplayOrder, StatusID, StatusCode, CreatedBy, CreatedDate, ModifiedBy, ModifiedDate, UpdateSeq)
     VALUES ('Fuel', 1, 1,2000, 1, 0, 0,
-        2, 0, 'ACTV', 'System', GETDATE(), 'System', GETDATE(), 1);
+        2, 1, 'ACTV', 'System', GETDATE(), 'System', GETDATE(), 1);
 END
 GO
 
@@ -21,7 +21,7 @@ BEGIN
     INSERT INTO dbo.Categories (CategoryName, NSWID ,TransactionTypeID ,Budget ,IncludeExpense ,IncludeIncome, IncludeSavings
            ,DisplayOrder, StatusID, StatusCode, CreatedBy, CreatedDate, ModifiedBy, ModifiedDate, UpdateSeq)
     VALUES ('Groceries', 1, 1,4000, 1, 0, 0,
-        3, 0, 'ACTV', 'System', GETDATE(), 'System', GETDATE(), 1);
+        3, 1, 'ACTV', 'System', GETDATE(), 'System', GETDATE(), 1);
 END
 GO
 
@@ -30,7 +30,7 @@ BEGIN
     INSERT INTO dbo.Categories (CategoryName, NSWID ,TransactionTypeID ,Budget ,IncludeExpense ,IncludeIncome, IncludeSavings
            ,DisplayOrder, StatusID, StatusCode, CreatedBy, CreatedDate, ModifiedBy, ModifiedDate, UpdateSeq)
     VALUES ('Rent', 1, 1,16500, 1, 0, 0,
-        4, 0, 'ACTV', 'System', GETDATE(), 'System', GETDATE(), 1);
+        4, 1, 'ACTV', 'System', GETDATE(), 'System', GETDATE(), 1);
 END
 GO
 
@@ -39,7 +39,7 @@ BEGIN
     INSERT INTO dbo.Categories (CategoryName, NSWID ,TransactionTypeID ,Budget ,IncludeExpense ,IncludeIncome, IncludeSavings
            ,DisplayOrder, StatusID, StatusCode, CreatedBy, CreatedDate, ModifiedBy, ModifiedDate, UpdateSeq)
     VALUES ('School Fees', 1, 1,8000, 1, 0, 0,
-        5, 0, 'ACTV', 'System', GETDATE(), 'System', GETDATE(), 1);
+        5, 1, 'ACTV', 'System', GETDATE(), 'System', GETDATE(), 1);
 END
 GO
 
@@ -48,7 +48,7 @@ BEGIN
     INSERT INTO dbo.Categories (CategoryName, NSWID ,TransactionTypeID ,Budget ,IncludeExpense ,IncludeIncome, IncludeSavings
            ,DisplayOrder, StatusID, StatusCode, CreatedBy, CreatedDate, ModifiedBy, ModifiedDate, UpdateSeq)
     VALUES ('Parental Support', 1, 1,4000, 1, 0, 0,
-        6, 0, 'ACTV', 'System', GETDATE(), 'System', GETDATE(), 1);
+        6, 1, 'ACTV', 'System', GETDATE(), 'System', GETDATE(), 1);
 END
 GO
 
@@ -57,7 +57,7 @@ BEGIN
     INSERT INTO dbo.Categories (CategoryName, NSWID ,TransactionTypeID ,Budget ,IncludeExpense ,IncludeIncome, IncludeSavings
            ,DisplayOrder, StatusID, StatusCode, CreatedBy, CreatedDate, ModifiedBy, ModifiedDate, UpdateSeq)
     VALUES ('Loan Disbursement', 1, 1,21369, 1, 0, 0,
-        7, 0, 'ACTV', 'System', GETDATE(), 'System', GETDATE(), 1);
+        7, 1, 'ACTV', 'System', GETDATE(), 'System', GETDATE(), 1);
 END
 GO
 
@@ -66,7 +66,7 @@ BEGIN
     INSERT INTO dbo.Categories (CategoryName, NSWID ,TransactionTypeID ,Budget ,IncludeExpense ,IncludeIncome, IncludeSavings
            ,DisplayOrder, StatusID, StatusCode, CreatedBy, CreatedDate, ModifiedBy, ModifiedDate, UpdateSeq)
     VALUES ('Food', 2, 1,2000, 1, 0, 0,
-        8, 0, 'ACTV', 'System', GETDATE(), 'System', GETDATE(), 1);
+        8, 1, 'ACTV', 'System', GETDATE(), 'System', GETDATE(), 1);
 END
 GO
 
@@ -75,7 +75,7 @@ BEGIN
     INSERT INTO dbo.Categories (CategoryName, NSWID ,TransactionTypeID ,Budget ,IncludeExpense ,IncludeIncome, IncludeSavings
            ,DisplayOrder, StatusID, StatusCode, CreatedBy, CreatedDate, ModifiedBy, ModifiedDate, UpdateSeq)
     VALUES ('Shopping', 2, 1,2000, 1, 0, 0,
-        9, 0, 'ACTV', 'System', GETDATE(), 'System', GETDATE(), 1);
+        9, 1, 'ACTV', 'System', GETDATE(), 'System', GETDATE(), 1);
 END
 GO
 
@@ -84,7 +84,7 @@ BEGIN
     INSERT INTO dbo.Categories (CategoryName, NSWID ,TransactionTypeID ,Budget ,IncludeExpense ,IncludeIncome, IncludeSavings
            ,DisplayOrder, StatusID, StatusCode, CreatedBy, CreatedDate, ModifiedBy, ModifiedDate, UpdateSeq)
     VALUES ('Medical', 2, 1,4000, 1, 0, 0,
-        10, 0, 'ACTV', 'System', GETDATE(), 'System', GETDATE(), 1);
+        10, 1, 'ACTV', 'System', GETDATE(), 'System', GETDATE(), 1);
 END
 GO
 
@@ -93,7 +93,7 @@ BEGIN
     INSERT INTO dbo.Categories (CategoryName, NSWID ,TransactionTypeID ,Budget ,IncludeExpense ,IncludeIncome, IncludeSavings
            ,DisplayOrder, StatusID, StatusCode, CreatedBy, CreatedDate, ModifiedBy, ModifiedDate, UpdateSeq)
     VALUES ('Bills', 2, 1,2000, 1, 0, 0,
-        11, 0, 'ACTV', 'System', GETDATE(), 'System', GETDATE(), 1);
+        11, 1, 'ACTV', 'System', GETDATE(), 'System', GETDATE(), 1);
 END
 GO
 
@@ -102,7 +102,7 @@ BEGIN
     INSERT INTO dbo.Categories (CategoryName, NSWID ,TransactionTypeID ,Budget ,IncludeExpense ,IncludeIncome, IncludeSavings
            ,DisplayOrder, StatusID, StatusCode, CreatedBy, CreatedDate, ModifiedBy, ModifiedDate, UpdateSeq)
     VALUES ('Others', 2, 1,2000, 1, 0, 0,
-        12, 0, 'ACTV', 'System', GETDATE(), 'System', GETDATE(), 1);
+        12, 1, 'ACTV', 'System', GETDATE(), 'System', GETDATE(), 1);
 END
 GO
 
@@ -111,7 +111,7 @@ BEGIN
     INSERT INTO dbo.Categories (CategoryName, NSWID ,TransactionTypeID ,Budget ,IncludeExpense ,IncludeIncome, IncludeSavings
            ,DisplayOrder, StatusID, StatusCode, CreatedBy, CreatedDate, ModifiedBy, ModifiedDate, UpdateSeq)
     VALUES ('Mutual Funds', 3, 1,18000, 0, 0, 1,
-        13, 0, 'ACTV', 'System', GETDATE(), 'System', GETDATE(), 1);
+        13, 1, 'ACTV', 'System', GETDATE(), 'System', GETDATE(), 1);
 END
 GO
 
@@ -120,7 +120,7 @@ BEGIN
     INSERT INTO dbo.Categories (CategoryName, NSWID ,TransactionTypeID ,Budget ,IncludeExpense ,IncludeIncome, IncludeSavings
            ,DisplayOrder, StatusID, StatusCode, CreatedBy, CreatedDate, ModifiedBy, ModifiedDate, UpdateSeq)
     VALUES ('Life Insurance', 3, 1,39116, 0, 0, 1,
-        14, 0, 'ACTV', 'System', GETDATE(), 'System', GETDATE(), 1);
+        14, 1, 'ACTV', 'System', GETDATE(), 'System', GETDATE(), 1);
 END
 GO
 
@@ -129,7 +129,7 @@ BEGIN
     INSERT INTO dbo.Categories (CategoryName, NSWID ,TransactionTypeID ,Budget ,IncludeExpense ,IncludeIncome, IncludeSavings
            ,DisplayOrder, StatusID, StatusCode, CreatedBy, CreatedDate, ModifiedBy, ModifiedDate, UpdateSeq)
     VALUES ('PF', 3, 1, 0, 0, 0, 1,
-        15, 0, 'ACTV', 'System', GETDATE(), 'System', GETDATE(), 1);
+        15, 1, 'ACTV', 'System', GETDATE(), 'System', GETDATE(), 1);
 END
 GO
 
@@ -138,7 +138,7 @@ BEGIN
     INSERT INTO dbo.Categories (CategoryName, NSWID ,TransactionTypeID ,Budget ,IncludeExpense ,IncludeIncome, IncludeSavings
            ,DisplayOrder, StatusID, StatusCode, CreatedBy, CreatedDate, ModifiedBy, ModifiedDate, UpdateSeq)
     VALUES ('PPF', 3, 1, 0, 0, 0, 1,
-        16, 0, 'ACTV', 'System', GETDATE(), 'System', GETDATE(), 1);
+        16, 1, 'ACTV', 'System', GETDATE(), 'System', GETDATE(), 1);
 END
 GO
 
@@ -147,7 +147,7 @@ BEGIN
     INSERT INTO dbo.Categories (CategoryName, NSWID ,TransactionTypeID ,Budget ,IncludeExpense ,IncludeIncome, IncludeSavings
            ,DisplayOrder, StatusID, StatusCode, CreatedBy, CreatedDate, ModifiedBy, ModifiedDate, UpdateSeq)
     VALUES ('Salary', 2, 4, 0, 0, 1, 0,
-        17, 0, 'ACTV', 'System', GETDATE(), 'System', GETDATE(), 1);
+        17, 1, 'ACTV', 'System', GETDATE(), 'System', GETDATE(), 1);
 END
 GO
 
@@ -156,7 +156,7 @@ BEGIN
     INSERT INTO dbo.Categories (CategoryName, NSWID ,TransactionTypeID ,Budget ,IncludeExpense ,IncludeIncome, IncludeSavings
            ,DisplayOrder, StatusID, StatusCode, CreatedBy, CreatedDate, ModifiedBy, ModifiedDate, UpdateSeq)
     VALUES ('Second Income', 2, 4, 0, 0, 1, 0,
-        18, 0, 'ACTV', 'System', GETDATE(), 'System', GETDATE(), 1);
+        18, 1, 'ACTV', 'System', GETDATE(), 'System', GETDATE(), 1);
 END
 GO
 
@@ -165,7 +165,7 @@ BEGIN
     INSERT INTO dbo.Categories (CategoryName, NSWID ,TransactionTypeID ,Budget ,IncludeExpense ,IncludeIncome, IncludeSavings
            ,DisplayOrder, StatusID, StatusCode, CreatedBy, CreatedDate, ModifiedBy, ModifiedDate, UpdateSeq)
     VALUES ('Annual Income', 2, 4, 0, 0, 1, 0,
-        19, 0, 'ACTV', 'System', GETDATE(), 'System', GETDATE(), 1);
+        19, 1, 'ACTV', 'System', GETDATE(), 'System', GETDATE(), 1);
 END
 GO
 
@@ -174,7 +174,7 @@ BEGIN
     INSERT INTO dbo.Categories (CategoryName, NSWID ,TransactionTypeID ,Budget ,IncludeExpense ,IncludeIncome, IncludeSavings
            ,DisplayOrder, StatusID, StatusCode, CreatedBy, CreatedDate, ModifiedBy, ModifiedDate, UpdateSeq)
     VALUES ('Mutual Fund Income', 2, 4, 0, 0, 1, 0,
-        20, 0, 'ACTV', 'System', GETDATE(), 'System', GETDATE(), 1);
+        20, 1, 'ACTV', 'System', GETDATE(), 'System', GETDATE(), 1);
 END
 GO
 
@@ -183,7 +183,7 @@ BEGIN
     INSERT INTO dbo.Categories (CategoryName, NSWID ,TransactionTypeID ,Budget ,IncludeExpense ,IncludeIncome, IncludeSavings
            ,DisplayOrder, StatusID, StatusCode, CreatedBy, CreatedDate, ModifiedBy, ModifiedDate, UpdateSeq)
     VALUES ('Life Insurance Income', 2, 4, 0, 0, 1, 0,
-        21, 0, 'ACTV', 'System', GETDATE(), 'System', GETDATE(), 1);
+        21, 1, 'ACTV', 'System', GETDATE(), 'System', GETDATE(), 1);
 END
 GO
 
@@ -192,7 +192,7 @@ BEGIN
     INSERT INTO dbo.Categories (CategoryName, NSWID ,TransactionTypeID ,Budget ,IncludeExpense ,IncludeIncome, IncludeSavings
            ,DisplayOrder, StatusID, StatusCode, CreatedBy, CreatedDate, ModifiedBy, ModifiedDate, UpdateSeq)
     VALUES ('Account Transfer', 2, 4, 0, 0, 0, 0,
-        22, 0, 'ACTV', 'System', GETDATE(), 'System', GETDATE(), 1);
+        22, 1, 'ACTV', 'System', GETDATE(), 'System', GETDATE(), 1);
 END
 GO
 
@@ -201,7 +201,7 @@ BEGIN
     INSERT INTO dbo.Categories (CategoryName, NSWID ,TransactionTypeID ,Budget ,IncludeExpense ,IncludeIncome, IncludeSavings
            ,DisplayOrder, StatusID, StatusCode, CreatedBy, CreatedDate, ModifiedBy, ModifiedDate, UpdateSeq)
     VALUES ('Hidden Loan', 2, 4, 0, 0, 0, 0,
-        23, 0, 'ACTV', 'System', GETDATE(), 'System', GETDATE(), 1);
+        23, 1, 'ACTV', 'System', GETDATE(), 'System', GETDATE(), 1);
 END
 GO
 
