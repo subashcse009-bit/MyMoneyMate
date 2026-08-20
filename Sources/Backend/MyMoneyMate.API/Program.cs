@@ -1,12 +1,16 @@
 using Microsoft.EntityFrameworkCore;
 using MyMoneyMate.Application.Import;
-using MyMoneyMate.Application.Interfaces;
+using MyMoneyMate.Application.Repository;
+using MyMoneyMate.Application.Repository.IRepository;
 using MyMoneyMate.Application.Services;
 using MyMoneyMate.Infrastructure;
 using MyMoneyMate.Infrastructure.Data;
 using MyMoneyMate.Infrastructure.Repositories;
+using OfficeOpenXml;
 
 var builder = WebApplication.CreateBuilder(args);
+
+ExcelPackage.License.SetNonCommercialOrganization("MyMoneyMate");
 
 // Add services to the container.
 
@@ -20,6 +24,8 @@ builder.Services.AddDbContext<MyMoneyMateDBContext>(options =>
 
 builder.Services.AddScoped<ImportService>();
 builder.Services.AddScoped<ITransactionStageRepository, TransactionStageRepository>();
+builder.Services.AddScoped<IImportBatchRepository, ImportBatchRepository>();
+
 builder.Services.AddSingleton<DbConnectionFactory>();
 
 // register importer implementations you have

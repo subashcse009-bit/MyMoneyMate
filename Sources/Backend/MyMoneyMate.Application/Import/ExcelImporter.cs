@@ -1,5 +1,4 @@
 ﻿using MyMoneyMate.Application.DTO;
-using MyMoneyMate.Application.Interfaces;
 using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
@@ -7,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using MyMoneyMate.Application.Repository.IRepository;
 
 namespace MyMoneyMate.Application.Import
 {
@@ -23,7 +23,6 @@ namespace MyMoneyMate.Application.Import
         public IEnumerable<TransactionImportRow> ReadTransactions(Stream stream)
         {
             var rows = new List<TransactionImportRow>();
-            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             using var package = new ExcelPackage(stream);
             var sheet = package.Workbook.Worksheets[0];
             var rowCount = sheet.Dimension.Rows;
@@ -33,11 +32,11 @@ namespace MyMoneyMate.Application.Import
                 rows.Add(new TransactionImportRow
                 {
                     TransactionDate = DateTime.TryParse(sheet.Cells[row, 1].Text, out var transactionDate) ? transactionDate : DateTime.MinValue,
-                    Description = sheet.Cells[row, 2].Text,
-                    IncomeAmount = decimal.TryParse(sheet.Cells[row, 3].Text, out var incomeAmount) ? incomeAmount : 0m,
-                    ExpenseAmount = decimal.TryParse(sheet.Cells[row, 4].Text, out var expenseAmount) ? expenseAmount : 0m,
+                    Account = sheet.Cells[row, 4].Text,
                     Category = sheet.Cells[row, 5].Text,
-                    Account = sheet.Cells[row, 6].Text
+                    Description = sheet.Cells[row, 6].Text,
+                    IncomeAmount = Convert.ToDecimal(sheet.Cells[row, 8].Value),
+                    ExpenseAmount = Convert.ToDecimal(sheet.Cells[row, 9].Value)
                 });
             }
 

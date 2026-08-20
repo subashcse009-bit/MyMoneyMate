@@ -12,7 +12,7 @@ using MyMoneyMate.Infrastructure;
 namespace MyMoneyMate.Infrastructure.Migrations
 {
     [DbContext(typeof(MyMoneyMateDBContext))]
-    [Migration("20260820170412_Phase1_Migration")]
+    [Migration("20260820185019_Phase1_Migration")]
     partial class Phase1_Migration
     {
         /// <inheritdoc />
@@ -447,9 +447,6 @@ namespace MyMoneyMate.Infrastructure.Migrations
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
-
-                    b.Property<DateTime>("ImportedOn")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("ModifiedBy")
                         .IsRequired()

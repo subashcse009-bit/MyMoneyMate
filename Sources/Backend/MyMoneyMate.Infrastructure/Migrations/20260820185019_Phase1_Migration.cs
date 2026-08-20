@@ -139,7 +139,6 @@ namespace MyMoneyMate.Infrastructure.Migrations
                     ImportBatchId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FileName = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    ImportedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     TotalRecords = table.Column<int>(type: "int", nullable: false),
                     TotalSuccessRecords = table.Column<int>(type: "int", nullable: false),
                     TotalFailedRecords = table.Column<int>(type: "int", nullable: false),

@@ -445,9 +445,6 @@ namespace MyMoneyMate.Infrastructure.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<DateTime>("ImportedOn")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("ModifiedBy")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");

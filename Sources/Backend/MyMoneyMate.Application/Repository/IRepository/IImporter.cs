@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyMoneyMate.Application.Interfaces
+namespace MyMoneyMate.Application.Repository.IRepository
 {
     public interface IImporter
     {

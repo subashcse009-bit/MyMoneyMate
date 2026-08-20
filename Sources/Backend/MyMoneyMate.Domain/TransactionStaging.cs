@@ -13,7 +13,10 @@ namespace MyMoneyMate.Domain
         [Key]
         public int TransactionStagingId { get; set; }
 
-        public int ImportBatchDetailId { get; set; }
+        public int ImportBatchId { get; set; }
+
+        [ForeignKey("ImportBatchId")]
+        public ImportBatch ImportBatch { get; set; }
 
         public int RowNumber { get; set; }
 

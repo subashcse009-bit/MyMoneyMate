@@ -1,5 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
-using MyMoneyMate.Application.Interfaces;
+using MyMoneyMate.Application.Repository.IRepository;
 using MyMoneyMate.Domain;
 using MyMoneyMate.Infrastructure.Data;
 using System;
@@ -12,54 +12,17 @@ namespace MyMoneyMate.Infrastructure.Repositories
 {
     public class TransactionStageRepository : ITransactionStageRepository
     {
-        private readonly DbConnectionFactory _factory;
+        private readonly MyMoneyMateDBContext _context;
 
-        public TransactionStageRepository(DbConnectionFactory factory)
+        public TransactionStageRepository(MyMoneyMateDBContext context)
         {
-            _factory = factory;
+            _context = context;
         }
 
         public async Task SaveAsync(TransactionStaging entity)
         {
-            const string sql = @"
-        INSERT INTO TransactionStaging
-        (
-            ImportBatchDetailID,
-            TransactionDate,
-            AccountName,
-            CategoryName,
-            Description,
-            PaymentMode,
-            ExpenseAmount,
-            IncomeAmount
-        )
-        VALUES
-        (
-            @ImportBatchDetailID,
-            @TransactionDate,
-            @AccountName,
-            @CategoryName,
-            @Description,
-            @PaymentMode,
-            @ExpenseAmount,
-            @IncomeAmount
-        )";
-
-            using var connection = _factory.Create();
-            await connection.OpenAsync();
-
-            using var command = new SqlCommand(sql, connection);
-
-            command.Parameters.AddWithValue("@ImportBatchDetailID", entity.ImportBatchDetailId);
-            command.Parameters.AddWithValue("@TransactionDate", entity.TransactionDate );
-            command.Parameters.AddWithValue("@AccountName", entity.AccountName ?? string.Empty);
-            command.Parameters.AddWithValue("@CategoryName", entity.CategoryName ?? string.Empty);
-            command.Parameters.AddWithValue("@Description", entity.Description ?? string.Empty);
-            command.Parameters.AddWithValue("@PaymentMode", entity.PaymentMode ?? string.Empty);
-            command.Parameters.AddWithValue("@ExpenseAmount", entity.ExpenseAmount );
-            command.Parameters.AddWithValue("@IncomeAmount", entity.IncomeAmount);
-
-            await command.ExecuteNonQueryAsync();
+            _context.TransactionStaging.Add(entity);
+            await _context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<TransactionStaging>> GetByBatchIdAsync(Guid batchId)

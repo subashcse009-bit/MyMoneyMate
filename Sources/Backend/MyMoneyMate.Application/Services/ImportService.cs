@@ -1,4 +1,4 @@
-﻿using MyMoneyMate.Application.Interfaces;
+﻿using MyMoneyMate.Application.Repository.IRepository;
 using MyMoneyMate.Domain;
 using System;
 using System.Collections.Generic;
@@ -12,16 +12,32 @@ namespace MyMoneyMate.Application.Services
     {
         private readonly IEnumerable<IImporter> _importers;
         private readonly ITransactionStageRepository _repository;
+        private readonly IImportBatchRepository _importBatchRepository;
 
-        public ImportService(IEnumerable<IImporter> importers, ITransactionStageRepository repository)
+        public ImportService(IEnumerable<IImporter> importers, ITransactionStageRepository repository, IImportBatchRepository importBatchRepository)
         {
             _importers = importers;
             _repository = repository;
+            _importBatchRepository = importBatchRepository;
         }
 
         public async Task<Guid> ImportAsync(Stream stream, string fileName, string? contentType = null)
         {
             var batchId = Guid.NewGuid();
+
+            var importBatch = new ImportBatch
+            {
+                FileName = fileName,
+                StatusId = 1,
+                StatusValue = "Pending",
+                CreatedBy = "System",
+                CreatedDate = DateTime.Now,
+                ModifiedBy = "System",
+                ModifiedDate = DateTime.Now,
+                UpdateSeq = 1
+            };
+
+            var importBatchId = _importBatchRepository.SaveAsync(importBatch);
 
             var importer = _importers.FirstOrDefault(i => i.CanImport(fileName, contentType));
             if (importer == null) throw new InvalidOperationException("No importer available for the provided file type.");
@@ -32,12 +48,18 @@ namespace MyMoneyMate.Application.Services
             {
                 var stage = new TransactionStaging
                 {
+                    ImportBatchDetailId = importBatchId,
                     TransactionDate = row.TransactionDate,
                     Description = row.Description,
                     IncomeAmount = row.IncomeAmount,
                     ExpenseAmount = row.ExpenseAmount,
                     CategoryName = row.Category,
-                    AccountName = row.Account
+                    AccountName = row.Account,
+                    CreatedBy = "System",
+                    CreatedDate = DateTime.Now,
+                    ModifiedBy = "System",
+                    ModifiedDate = DateTime.Now,
+                    UpdateSeq = 1
                 };
 
                 await _repository.SaveAsync(stage);

@@ -16,13 +16,12 @@ namespace MyMoneyMate.Domain
         [MaxLength(255)]
         public string FileName { get; set; } = string.Empty;
 
-        public DateTime ImportedOn { get; set; }
-
         public int TotalRecords { get; set; }
 
         public int TotalSuccessRecords { get; set; }
 
         public int TotalFailedRecords { get; set; }
+
         public string? Remarks { get; set; }
 
         public int? StatusId { get; set; }

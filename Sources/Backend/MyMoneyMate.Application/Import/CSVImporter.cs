@@ -1,5 +1,5 @@
 ﻿using MyMoneyMate.Application.DTO;
-using MyMoneyMate.Application.Interfaces;
+using MyMoneyMate.Application.Repository.IRepository;
 using System;
 using System.Collections.Generic;
 using System.Formats.Asn1;
