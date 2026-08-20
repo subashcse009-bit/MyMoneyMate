@@ -50,7 +50,7 @@ namespace MyMoneyMate.Infrastructure.Repositories
 
             using var command = new SqlCommand(sql, connection);
 
-            command.Parameters.AddWithValue("@ImportBatchDetailID", entity.ImportBatchDetailID);
+            command.Parameters.AddWithValue("@ImportBatchDetailID", entity.ImportBatchDetailId);
             command.Parameters.AddWithValue("@TransactionDate", entity.TransactionDate );
             command.Parameters.AddWithValue("@AccountName", entity.AccountName ?? string.Empty);
             command.Parameters.AddWithValue("@CategoryName", entity.CategoryName ?? string.Empty);
