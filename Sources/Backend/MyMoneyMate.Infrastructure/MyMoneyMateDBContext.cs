@@ -18,7 +18,6 @@ namespace MyMoneyMate.Infrastructure
         public DbSet<CodeValues> CodeValues { get; set; }
         public DbSet<Goal> Goals { get; set; }
         public DbSet<ImportBatch> ImportBatch { get; set; }
-        public DbSet<ImportBatchDetail> ImportBatchDetails { get; set; }
         public DbSet<InvestmentDetail> InvestmentDetails { get; set; }
         public DbSet<InvestmentDetailHistory> InvestmentDetailHistories { get; set; }
         public DbSet<InvestmentType> InvestmentTypes { get; set; }

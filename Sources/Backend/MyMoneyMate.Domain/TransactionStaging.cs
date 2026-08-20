@@ -12,27 +12,43 @@ namespace MyMoneyMate.Domain
     {
         [Key]
         public int TransactionStagingId { get; set; }
-        
-        [Required]
+
         public int ImportBatchDetailId { get; set; }
-        
-        [Required]
+
+        public int RowNumber { get; set; }
+
         public DateTime TransactionDate { get; set; }
-        
-        [Required]
-        public string AccountName { get; set; }
-        
-        [Required]
-        public string CategoryName { get; set; }
-        
-        public string Description { get; set; }
-        
-        public string PaymentMode { get; set; }
-        
+
+        public string AccountName { get; set; } = string.Empty;
+
+        public string CategoryName { get; set; } = string.Empty;
+
+        public string Description { get; set; } = string.Empty;
+
+        public string? PaymentMode { get; set; }
+
         [Column(TypeName = "decimal(18,2)")]
         public decimal ExpenseAmount { get; set; }
-        
+
         [Column(TypeName = "decimal(18,2)")]
         public decimal IncomeAmount { get; set; }
+
+        //Account Not Found, Category Not Found, Amount Invalid
+        public string? ValidationMessage { get; set; }
+
+        public int? StatusId { get; set; }
+        
+        ///Pending = 1, Valid, Invalid, Promoted
+        public string? StatusValue { get; set; }
+
+        public string CreatedBy { get; set; }
+
+        public DateTime CreatedDate { get; set; }
+
+        public string ModifiedBy { get; set; }
+
+        public DateTime ModifiedDate { get; set; }
+
+        public int UpdateSeq { get; set; }
     }
 }

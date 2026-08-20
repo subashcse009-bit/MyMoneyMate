@@ -7,21 +7,37 @@ using System.Threading.Tasks;
 
 namespace MyMoneyMate.Domain
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class ImportBatch
     {
-        [Key]
-        public int ImportBatchId {  get; set; }
-        [Required]
-        public string FileName {  get; set; }
-        [Required]
-        public DateTime ImportDate { get; set; }
-        [Required]
-        public int TotalRecords{ get; set; }
-        [Required]
-        public int TotalSuccessRecords {  get; set; }
-        [Required]
+        public int ImportBatchId { get; set; }
+
+        [MaxLength(255)]
+        public string FileName { get; set; } = string.Empty;
+
+        public DateTime ImportedOn { get; set; }
+
+        public int TotalRecords { get; set; }
+
+        public int TotalSuccessRecords { get; set; }
+
         public int TotalFailedRecords { get; set; }
-        [Required]
-        public string Status { get; set; }
+        public string? Remarks { get; set; }
+
+        public int? StatusId { get; set; }
+
+        //Pending, Processing Completed CompletedWithErrors, Failed, Cancelled
+        public string? StatusValue { get; set; }
+
+        public string CreatedBy { get; set; }
+
+        public DateTime CreatedDate { get; set; }
+
+        public string ModifiedBy { get; set; }
+
+        public DateTime ModifiedDate { get; set; }
+
+        public int UpdateSeq { get; set; }
     }
 }

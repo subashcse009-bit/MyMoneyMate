@@ -27,7 +27,6 @@ namespace MyMoneyMate.Domain
 
         public int DisplayOrder { get; set; }
 
-        [Required]
         public int? StatusId { get; set; }
 
         public string? StatusValue { get; set; }

@@ -61,7 +61,7 @@ namespace MyMoneyMate.Infrastructure.Migrations
                     b.Property<decimal>("OpeningBalance")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("StatusId")
+                    b.Property<int?>("StatusId")
                         .HasColumnType("int");
 
                     b.Property<string>("StatusValue")
@@ -433,15 +433,35 @@ namespace MyMoneyMate.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ImportBatchId"));
 
-                    b.Property<string>("FileName")
+                    b.Property<string>("CreatedBy")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("ImportDate")
+                    b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Status")
+                    b.Property<string>("FileName")
                         .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime>("ImportedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ModifiedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Remarks")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("StatusId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("StatusValue")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("TotalFailedRecords")
@@ -453,36 +473,12 @@ namespace MyMoneyMate.Infrastructure.Migrations
                     b.Property<int>("TotalSuccessRecords")
                         .HasColumnType("int");
 
+                    b.Property<int>("UpdateSeq")
+                        .HasColumnType("int");
+
                     b.HasKey("ImportBatchId");
 
                     b.ToTable("ImportBatch");
-                });
-
-            modelBuilder.Entity("MyMoneyMate.Domain.ImportBatchDetail", b =>
-                {
-                    b.Property<int>("ImportBatchDetailId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ImportBatchDetailId"));
-
-                    b.Property<string>("ErrorMessage")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ImportBatchId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RecordNumber")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ImportBatchDetailId");
-
-                    b.ToTable("ImportBatchDetails");
                 });
 
             modelBuilder.Entity("MyMoneyMate.Domain.InvestmentDetail", b =>
@@ -759,8 +755,18 @@ namespace MyMoneyMate.Infrastructure.Migrations
                     b.Property<int>("AccountId")
                         .HasColumnType("int");
 
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -769,17 +775,42 @@ namespace MyMoneyMate.Infrastructure.Migrations
                     b.Property<DateTime>("EffectiveDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<decimal>("ExpenseAmount")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<string>("ModifiedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("IncomeAmount")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime2");
 
-                    b.Property<int>("PaymentMode")
+                    b.Property<int?>("PaymentModeId")
                         .HasColumnType("int");
+
+                    b.Property<string>("PaymentModeValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ReferenceNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("StatusId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("StatusValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Tags")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("TransactionDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int?>("TransactionTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TransactionTypeValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UpdateSeq")
+                        .HasColumnType("int");
 
                     b.HasKey("TransactionId");
 
@@ -802,6 +833,13 @@ namespace MyMoneyMate.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -815,12 +853,33 @@ namespace MyMoneyMate.Infrastructure.Migrations
                     b.Property<decimal>("IncomeAmount")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("PaymentMode")
+                    b.Property<string>("ModifiedBy")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PaymentMode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RowNumber")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("StatusId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("StatusValue")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("TransactionDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("UpdateSeq")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ValidationMessage")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("TransactionStagingId");
 
