@@ -67,8 +67,7 @@ namespace MyMoneyMate.Infrastructure.Migrations
                 name: "Codes",
                 columns: table => new
                 {
-                    CodeId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CodeId = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     StartDate = table.Column<DateOnly>(type: "date", nullable: false),
@@ -232,35 +231,6 @@ namespace MyMoneyMate.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TransactionStaging",
-                columns: table => new
-                {
-                    TransactionStagingId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ImportBatchDetailId = table.Column<int>(type: "int", nullable: false),
-                    RowNumber = table.Column<int>(type: "int", nullable: false),
-                    TransactionDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    AccountName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CategoryName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PaymentMode = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ExpenseAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    IncomeAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    ValidationMessage = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StatusId = table.Column<int>(type: "int", nullable: true),
-                    StatusValue = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdateSeq = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TransactionStaging", x => x.TransactionStagingId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AccountBudgets",
                 columns: table => new
                 {
@@ -394,6 +364,41 @@ namespace MyMoneyMate.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "TransactionStaging",
+                columns: table => new
+                {
+                    TransactionStagingId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ImportBatchId = table.Column<int>(type: "int", nullable: false),
+                    RowNumber = table.Column<int>(type: "int", nullable: false),
+                    TransactionDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    AccountName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CategoryName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PaymentMode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ExpenseAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    IncomeAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ValidationMessage = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StatusId = table.Column<int>(type: "int", nullable: true),
+                    StatusValue = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdateSeq = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TransactionStaging", x => x.TransactionStagingId);
+                    table.ForeignKey(
+                        name: "FK_TransactionStaging_ImportBatch_ImportBatchId",
+                        column: x => x.ImportBatchId,
+                        principalTable: "ImportBatch",
+                        principalColumn: "ImportBatchId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "InvestmentDetailHistories",
                 columns: table => new
                 {
@@ -452,6 +457,11 @@ namespace MyMoneyMate.Infrastructure.Migrations
                 name: "IX_ScheduledExpenses_CategoryId",
                 table: "ScheduledExpenses",
                 column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TransactionStaging_ImportBatchId",
+                table: "TransactionStaging",
+                column: "ImportBatchId");
         }
 
         /// <inheritdoc />
@@ -468,9 +478,6 @@ namespace MyMoneyMate.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "CodeValues");
-
-            migrationBuilder.DropTable(
-                name: "ImportBatch");
 
             migrationBuilder.DropTable(
                 name: "InvestmentDetailHistories");
@@ -498,6 +505,9 @@ namespace MyMoneyMate.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "Categories");
+
+            migrationBuilder.DropTable(
+                name: "ImportBatch");
 
             migrationBuilder.DropTable(
                 name: "Goals");

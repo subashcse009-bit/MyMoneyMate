@@ -41,7 +41,7 @@ namespace MyMoneyMate.Domain
 
         public int? StatusId { get; set; }
         
-        ///Pending = 1, Valid, Invalid, Promoted
+        ///Pending, Valid, Invalid, Promoted
         public string? StatusValue { get; set; }
 
         public string CreatedBy { get; set; }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using MyMoneyMate.Application.Repository.IRepository;
 using MyMoneyMate.Domain;
 using MyMoneyMate.Infrastructure.Data;
@@ -25,9 +26,46 @@ namespace MyMoneyMate.Infrastructure.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<TransactionStaging>> GetByBatchIdAsync(Guid batchId)
+        public async Task<IEnumerable<TransactionStaging>> GetByBatchIdAsync(int batchId)
         {
-            throw new NotImplementedException();
+            return await _context.TransactionStaging.Where(ts => ts.ImportBatchId == batchId).ToListAsync();
+        }
+
+        public async Task<IEnumerable<TransactionStaging>> GetPendingAndInvalidTransactionStages(int batchId)
+        {
+            return await _context.TransactionStaging
+                .Where(ts => (ts.ImportBatchId == batchId) && (ts.StatusValue == "PEND" || ts.StatusValue == "INVD"))
+                .ToListAsync();
+        }
+
+        public async Task UpdateAsync(TransactionStaging entity)
+        {
+            _context.TransactionStaging.Update(entity);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteAsync(TransactionStaging entity)
+        {
+            _context.TransactionStaging.Remove(entity);
+            _context.SaveChangesAsync();
+        }
+
+        public Task<bool> DuplicateAsync(TransactionStaging entity)
+        {
+
+            return _context.TransactionStaging.AnyAsync(ts =>
+                ts.TransactionDate == entity.TransactionDate &&
+                ts.AccountName == entity.AccountName &&
+                ts.CategoryName == entity.CategoryName &&
+                ts.ExpenseAmount == entity.ExpenseAmount &&
+                ts.IncomeAmount == entity.IncomeAmount
+            );
+        }
+
+        public async Task DeleteByBatchIdAsync(int batchId)
+        {
+            _context.TransactionStaging.RemoveRange(_context.TransactionStaging.Where(ts => ts.ImportBatchId == batchId));
+            await _context.SaveChangesAsync();
         }
     }
 }

@@ -32,11 +32,11 @@ namespace MyMoneyMate.Application.Import
                 rows.Add(new TransactionImportRow
                 {
                     TransactionDate = DateTime.TryParse(sheet.Cells[row, 1].Text, out var transactionDate) ? transactionDate : DateTime.MinValue,
-                    Account = sheet.Cells[row, 4].Text,
-                    Category = sheet.Cells[row, 5].Text,
-                    Description = sheet.Cells[row, 6].Text,
-                    IncomeAmount = Convert.ToDecimal(sheet.Cells[row, 8].Value),
-                    ExpenseAmount = Convert.ToDecimal(sheet.Cells[row, 9].Value)
+                    Account = sheet.Cells[row, 2].Text,
+                    Category = sheet.Cells[row, 3].Text,
+                    Description = sheet.Cells[row, 4].Text,
+                    IncomeAmount = Convert.ToDecimal(sheet.Cells[row, 6].Value),
+                    ExpenseAmount = Convert.ToDecimal(sheet.Cells[row, 7].Value)
                 });
             }
 

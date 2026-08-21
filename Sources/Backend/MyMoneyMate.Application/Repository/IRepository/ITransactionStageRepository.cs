@@ -10,6 +10,11 @@ namespace MyMoneyMate.Application.Repository.IRepository
     public interface ITransactionStageRepository
     {
         Task SaveAsync(TransactionStaging entity);
-        Task<IEnumerable<TransactionStaging>> GetByBatchIdAsync(Guid batchId);
+        Task<IEnumerable<TransactionStaging>> GetByBatchIdAsync(int batchId);
+        Task<IEnumerable<TransactionStaging>> GetPendingAndInvalidTransactionStages(int batchId);
+        Task DeleteByBatchIdAsync(int batchId);
+        Task UpdateAsync(TransactionStaging entity);
+        Task DeleteAsync(TransactionStaging entity);
+        Task<bool> DuplicateAsync(TransactionStaging entity);
     }
 }

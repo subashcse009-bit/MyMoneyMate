@@ -11,6 +11,7 @@ namespace MyMoneyMate.Domain
     public class Codes
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int CodeId { get; set; }
 
         public string Name { get; set; }

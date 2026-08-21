@@ -9,6 +9,8 @@ namespace MyMoneyMate.Application.Repository.IRepository
 {
     public interface IImportBatchRepository
     {
-        int SaveAsync(ImportBatch entity);
+        Task<int> SaveAsync(ImportBatch entity);
+
+        Task UpdateBatchStatusAsync(int batchId);
     }
 }

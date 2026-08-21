@@ -23,6 +23,7 @@ builder.Services.AddDbContext<MyMoneyMateDBContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<ImportService>();
+builder.Services.AddScoped<ValidateService>();
 builder.Services.AddScoped<ITransactionStageRepository, TransactionStageRepository>();
 builder.Services.AddScoped<IImportBatchRepository, ImportBatchRepository>();
 

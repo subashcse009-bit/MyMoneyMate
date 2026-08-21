@@ -26,7 +26,7 @@ namespace MyMoneyMate.Domain
 
         public int? StatusId { get; set; }
 
-        //Pending, Processing Completed CompletedWithErrors, Failed, Cancelled
+        //Pending, Processing, Completed, CompletedWithErrors, Failed, Cancelled
         public string? StatusValue { get; set; }
 
         public string CreatedBy { get; set; }

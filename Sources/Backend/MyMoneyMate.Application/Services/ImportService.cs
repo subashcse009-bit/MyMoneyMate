@@ -28,8 +28,8 @@ namespace MyMoneyMate.Application.Services
             var importBatch = new ImportBatch
             {
                 FileName = fileName,
-                StatusId = 1,
-                StatusValue = "Pending",
+                StatusId = 1000,
+                StatusValue = "PEND",
                 CreatedBy = "System",
                 CreatedDate = DateTime.Now,
                 ModifiedBy = "System",
@@ -37,7 +37,7 @@ namespace MyMoneyMate.Application.Services
                 UpdateSeq = 1
             };
 
-            var importBatchId = _importBatchRepository.SaveAsync(importBatch);
+            var importBatchId = await _importBatchRepository.SaveAsync(importBatch);
 
             var importer = _importers.FirstOrDefault(i => i.CanImport(fileName, contentType));
             if (importer == null) throw new InvalidOperationException("No importer available for the provided file type.");
@@ -48,13 +48,15 @@ namespace MyMoneyMate.Application.Services
             {
                 var stage = new TransactionStaging
                 {
-                    ImportBatchDetailId = importBatchId,
+                    ImportBatchId = importBatchId,
                     TransactionDate = row.TransactionDate,
                     Description = row.Description,
                     IncomeAmount = row.IncomeAmount,
                     ExpenseAmount = row.ExpenseAmount,
                     CategoryName = row.Category,
                     AccountName = row.Account,
+                    StatusId = 1001,
+                    StatusValue = "PEND",
                     CreatedBy = "System",
                     CreatedDate = DateTime.Now,
                     ModifiedBy = "System",
