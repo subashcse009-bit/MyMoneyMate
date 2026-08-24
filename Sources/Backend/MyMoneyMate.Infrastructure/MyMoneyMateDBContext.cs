@@ -35,7 +35,7 @@ namespace MyMoneyMate.Infrastructure
                 {
                     AccountId = 1,
                     AccountName = "HDFC",
-                    AccountType = "Bank",
+                    AccountTypeValue = "Savings Account",
                     OpeningBalance = 104847.59M,
                     CreditLimit = 0,
                     DisplayOrder = 1,

@@ -34,7 +34,13 @@ namespace MyMoneyMate.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("AccountType")
+                    b.Property<string>("AccountNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("AccountTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("AccountTypeValue")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -48,8 +54,20 @@ namespace MyMoneyMate.Infrastructure.Migrations
                     b.Property<decimal?>("CreditLimit")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<decimal?>("CurrentBalance")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<int>("DisplayOrder")
                         .HasColumnType("int");
+
+                    b.Property<string>("Institution")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal?>("InterestRate")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime?>("MaturityDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("ModifiedBy")
                         .IsRequired()
@@ -60,6 +78,9 @@ namespace MyMoneyMate.Infrastructure.Migrations
 
                     b.Property<decimal>("OpeningBalance")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime?>("StartDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int?>("StatusId")
                         .HasColumnType("int");
@@ -79,7 +100,8 @@ namespace MyMoneyMate.Infrastructure.Migrations
                         {
                             AccountId = 1,
                             AccountName = "HDFC",
-                            AccountType = "Bank",
+                            AccountTypeId = 0,
+                            AccountTypeValue = "Savings Account",
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2026, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreditLimit = 0m,

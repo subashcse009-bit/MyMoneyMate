@@ -16,14 +16,29 @@ namespace MyMoneyMate.Domain
 
         public string AccountName { get; set; }
 
+        public int AccountTypeId { get; set; }
         // Examples: Checking, Savings, CreditCard
-        public string AccountType { get; set; }
+        public string AccountTypeValue { get; set; }
+
+        public string? Institution { get; set; }
+
+        public string? AccountNumber { get; set; }
 
         [Column(TypeName = "decimal(18,2)")]
         public decimal OpeningBalance { get; set; }
 
         [Column(TypeName = "decimal(18,2)")]
+        public decimal? CurrentBalance { get; set; }
+
+        [Column(TypeName = "decimal(18,2)")]
         public decimal? CreditLimit { get; set; }
+        
+        [Column(TypeName = "decimal(18,2)")]
+        public decimal? InterestRate { get; set; }
+        
+        public DateTime? StartDate { get; set; }
+        
+        public DateTime? MaturityDate { get; set; }
 
         public int DisplayOrder { get; set; }
 
@@ -34,11 +49,11 @@ namespace MyMoneyMate.Domain
         public string CreatedBy { get; set; }
 
         public DateTime CreatedDate { get; set; }
-        
+
         public string ModifiedBy { get; set; }
-        
+
         public DateTime ModifiedDate { get; set; }
-        
+
         public int UpdateSeq { get; set; }
 
     }

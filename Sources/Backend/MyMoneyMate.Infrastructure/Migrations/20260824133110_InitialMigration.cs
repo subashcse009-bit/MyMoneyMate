@@ -18,9 +18,16 @@ namespace MyMoneyMate.Infrastructure.Migrations
                     AccountId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     AccountName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AccountType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AccountTypeId = table.Column<int>(type: "int", nullable: false),
+                    AccountTypeValue = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Institution = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AccountNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     OpeningBalance = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    CurrentBalance = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     CreditLimit = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    InterestRate = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    MaturityDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DisplayOrder = table.Column<int>(type: "int", nullable: false),
                     StatusId = table.Column<int>(type: "int", nullable: true),
                     StatusValue = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -421,8 +428,8 @@ namespace MyMoneyMate.Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "Accounts",
-                columns: new[] { "AccountId", "AccountName", "AccountType", "CreatedBy", "CreatedDate", "CreditLimit", "DisplayOrder", "ModifiedBy", "ModifiedDate", "OpeningBalance", "StatusId", "StatusValue", "UpdateSeq" },
-                values: new object[] { 1, "HDFC", "Bank", "System", new DateTime(2026, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0m, 1, "System", new DateTime(2026, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 104847.59m, 1, "ACTV", 1 });
+                columns: new[] { "AccountId", "AccountName", "AccountNumber", "AccountTypeId", "AccountTypeValue", "CreatedBy", "CreatedDate", "CreditLimit", "CurrentBalance", "DisplayOrder", "Institution", "InterestRate", "MaturityDate", "ModifiedBy", "ModifiedDate", "OpeningBalance", "StartDate", "StatusId", "StatusValue", "UpdateSeq" },
+                values: new object[] { 1, "HDFC", null, 0, "Savings Account", "System", new DateTime(2026, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0m, null, 1, null, null, null, "System", new DateTime(2026, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 104847.59m, null, 1, "ACTV", 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AccountBudgets_AccountId",
