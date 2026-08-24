@@ -17,7 +17,7 @@ namespace MyMoneyMate.Domain
         public string AccountName { get; set; }
 
         public int AccountTypeId { get; set; }
-        // Examples: Checking, Savings, CreditCard
+        // Examples: Bank Account, CreditCard, Cash, Loan, Mutual Fund, Stock, Other
         public string AccountTypeValue { get; set; }
 
         public string? Institution { get; set; }
@@ -39,6 +39,11 @@ namespace MyMoneyMate.Domain
         public DateTime? StartDate { get; set; }
         
         public DateTime? MaturityDate { get; set; }
+
+        public int AccountSideId { get; set; }
+
+        // Examples: Asset, Liability, Equity
+        public string AccountSideValue { get; set; }
 
         public int DisplayOrder { get; set; }
 

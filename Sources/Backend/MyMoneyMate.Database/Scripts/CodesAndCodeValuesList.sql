@@ -1,10 +1,165 @@
 DECLARE @CodeId INT;
 
+--Accout Module
+
+IF NOT EXISTS (SELECT 1 FROM dbo.Codes WHERE Name = 'AccountStatus' AND CodeId = 1001)
+BEGIN
+    INSERT INTO dbo.Codes (CodeId, Name, Description ,StartDate ,EndDate
+           ,CreatedBy, CreatedDate, ModifiedBy, ModifiedDate, UpdateSeq)
+    VALUES (1001 ,'AccountStatus', '', '2026-03-01', NULL
+        ,'System', GETDATE(), 'System', GETDATE(), 1);
+END
+
+SELECT @CodeId = CodeID FROM Codes WHERE Name ='AccountStatus';
+
+IF NOT EXISTS (SELECT 1 FROM dbo.CodeValues WHERE CodeValue = 'ACTV')
+BEGIN
+    INSERT INTO dbo.CodeValues(CodeId, CodeValue, Description, StartDate ,EndDate
+           ,CreatedBy, CreatedDate, ModifiedBy, ModifiedDate, UpdateSeq)
+    VALUES (@CodeId, 'ACTV', 'Active', '2026-03-01', NULL
+        ,'System', GETDATE(), 'System', GETDATE(), 1);
+END
+
+IF NOT EXISTS (SELECT 1 FROM dbo.CodeValues WHERE CodeValue = 'INAC')
+BEGIN
+    INSERT INTO dbo.CodeValues(CodeId, CodeValue, Description, StartDate ,EndDate
+           ,CreatedBy, CreatedDate, ModifiedBy, ModifiedDate, UpdateSeq)
+    VALUES (@CodeId, 'INAC', 'InActive', '2026-03-01', NULL
+        ,'System', GETDATE(), 'System', GETDATE(), 1);
+END
+
+IF NOT EXISTS (SELECT 1 FROM dbo.Codes WHERE Name = 'AccountType' AND CodeId = 1002)
+BEGIN
+    INSERT INTO dbo.Codes (CodeId, Name, Description ,StartDate ,EndDate
+           ,CreatedBy, CreatedDate, ModifiedBy, ModifiedDate, UpdateSeq)
+    VALUES (1002 ,'AccountType', '', '2026-03-01', NULL
+        ,'System', GETDATE(), 'System', GETDATE(), 1);
+END
+
+SELECT @CodeId = CodeID FROM Codes WHERE Name ='AccountType';
+
+IF NOT EXISTS (SELECT 1 FROM dbo.CodeValues WHERE CodeValue = 'BAAC')
+BEGIN
+    INSERT INTO dbo.CodeValues(CodeId, CodeValue, Description, StartDate ,EndDate
+           ,CreatedBy, CreatedDate, ModifiedBy, ModifiedDate, UpdateSeq)
+    VALUES (@CodeId, 'BAAC', 'Bank Account', '2026-03-01', NULL
+        ,'System', GETDATE(), 'System', GETDATE(), 1);
+END
+
+IF NOT EXISTS (SELECT 1 FROM dbo.CodeValues WHERE CodeValue = 'CASH')
+BEGIN
+    INSERT INTO dbo.CodeValues(CodeId, CodeValue, Description, StartDate ,EndDate
+           ,CreatedBy, CreatedDate, ModifiedBy, ModifiedDate, UpdateSeq)
+    VALUES (@CodeId, 'CASH', 'Cash', '2026-03-01', NULL
+        ,'System', GETDATE(), 'System', GETDATE(), 1);
+END
+
+IF NOT EXISTS (SELECT 1 FROM dbo.CodeValues WHERE CodeValue = 'CRCD')
+BEGIN
+    INSERT INTO dbo.CodeValues(CodeId, CodeValue, Description, StartDate ,EndDate
+           ,CreatedBy, CreatedDate, ModifiedBy, ModifiedDate, UpdateSeq)
+    VALUES (@CodeId, 'CRCD', 'Credit Card', '2026-03-01', NULL
+        ,'System', GETDATE(), 'System', GETDATE(), 1);
+END
+
+IF NOT EXISTS (SELECT 1 FROM dbo.CodeValues WHERE CodeValue = 'FCRD')
+BEGIN
+    INSERT INTO dbo.CodeValues(CodeId, CodeValue, Description, StartDate ,EndDate
+           ,CreatedBy, CreatedDate, ModifiedBy, ModifiedDate, UpdateSeq)
+    VALUES (@CodeId, 'FCRD', 'Food Card', '2026-03-01', NULL
+        ,'System', GETDATE(), 'System', GETDATE(), 1);
+END
+
+IF NOT EXISTS (SELECT 1 FROM dbo.CodeValues WHERE CodeValue = 'LOAN')
+BEGIN
+    INSERT INTO dbo.CodeValues(CodeId, CodeValue, Description, StartDate ,EndDate
+           ,CreatedBy, CreatedDate, ModifiedBy, ModifiedDate, UpdateSeq)
+    VALUES (@CodeId, 'LOAN', 'Loan', '2026-03-01', NULL
+        ,'System', GETDATE(), 'System', GETDATE(), 1);
+END
+
+IF NOT EXISTS (SELECT 1 FROM dbo.CodeValues WHERE CodeValue = 'MUFU')
+BEGIN
+    INSERT INTO dbo.CodeValues(CodeId, CodeValue, Description, StartDate ,EndDate
+           ,CreatedBy, CreatedDate, ModifiedBy, ModifiedDate, UpdateSeq)
+    VALUES (@CodeId, 'MUFU', 'Mutual Fund', '2026-03-01', NULL
+        ,'System', GETDATE(), 'System', GETDATE(), 1);
+END
+
+IF NOT EXISTS (SELECT 1 FROM dbo.CodeValues WHERE CodeValue = 'LIFE')
+BEGIN
+    INSERT INTO dbo.CodeValues(CodeId, CodeValue, Description, StartDate ,EndDate
+           ,CreatedBy, CreatedDate, ModifiedBy, ModifiedDate, UpdateSeq)
+    VALUES (@CodeId, 'LIFE', 'Life Insurance', '2026-03-01', NULL
+        ,'System', GETDATE(), 'System', GETDATE(), 1);
+END
+
+IF NOT EXISTS (SELECT 1 FROM dbo.CodeValues WHERE CodeValue = 'PRFU')
+BEGIN
+    INSERT INTO dbo.CodeValues(CodeId, CodeValue, Description, StartDate ,EndDate
+           ,CreatedBy, CreatedDate, ModifiedBy, ModifiedDate, UpdateSeq)
+    VALUES (@CodeId, 'PRFU', 'Private Fund', '2026-03-01', NULL
+        ,'System', GETDATE(), 'System', GETDATE(), 1);
+END
+
+IF NOT EXISTS (SELECT 1 FROM dbo.CodeValues WHERE CodeValue = 'PPFA')
+BEGIN
+    INSERT INTO dbo.CodeValues(CodeId, CodeValue, Description, StartDate ,EndDate
+           ,CreatedBy, CreatedDate, ModifiedBy, ModifiedDate, UpdateSeq)
+    VALUES (@CodeId, 'PPFA', 'PPF', '2026-03-01', NULL
+        ,'System', GETDATE(), 'System', GETDATE(), 1);
+END
+
+IF NOT EXISTS (SELECT 1 FROM dbo.CodeValues WHERE CodeValue = 'GOLD')
+BEGIN
+    INSERT INTO dbo.CodeValues(CodeId, CodeValue, Description, StartDate ,EndDate
+           ,CreatedBy, CreatedDate, ModifiedBy, ModifiedDate, UpdateSeq)
+    VALUES (@CodeId, 'GOLD', 'Gold', '2026-03-01', NULL
+        ,'System', GETDATE(), 'System', GETDATE(), 1);
+END
+
+IF NOT EXISTS (SELECT 1 FROM dbo.Codes WHERE Name = 'AccountSide' AND CodeId = 1003)
+BEGIN
+    INSERT INTO dbo.Codes (CodeId, Name, Description ,StartDate ,EndDate
+           ,CreatedBy, CreatedDate, ModifiedBy, ModifiedDate, UpdateSeq)
+    VALUES (1003 ,'AccountSide', '', '2026-03-01', NULL
+        ,'System', GETDATE(), 'System', GETDATE(), 1);
+END
+
+SELECT @CodeId = CodeID FROM Codes WHERE Name ='AccountSide';
+
+IF NOT EXISTS (SELECT 1 FROM dbo.CodeValues WHERE CodeValue = 'ASST')
+BEGIN
+    INSERT INTO dbo.CodeValues(CodeId, CodeValue, Description, StartDate ,EndDate
+           ,CreatedBy, CreatedDate, ModifiedBy, ModifiedDate, UpdateSeq)
+    VALUES (@CodeId, 'ASST', 'Asset', '2026-03-01', NULL
+        ,'System', GETDATE(), 'System', GETDATE(), 1);
+END
+
+IF NOT EXISTS (SELECT 1 FROM dbo.CodeValues WHERE CodeValue = 'LIAB')
+BEGIN
+    INSERT INTO dbo.CodeValues(CodeId, CodeValue, Description, StartDate ,EndDate
+           ,CreatedBy, CreatedDate, ModifiedBy, ModifiedDate, UpdateSeq)
+    VALUES (@CodeId, 'LIAB', 'Liability', '2026-03-01', NULL
+        ,'System', GETDATE(), 'System', GETDATE(), 1);
+END
+
+IF NOT EXISTS (SELECT 1 FROM dbo.CodeValues WHERE CodeValue = 'EQUI')
+BEGIN
+    INSERT INTO dbo.CodeValues(CodeId, CodeValue, Description, StartDate ,EndDate
+           ,CreatedBy, CreatedDate, ModifiedBy, ModifiedDate, UpdateSeq)
+    VALUES (@CodeId, 'EQUI', 'Equity', '2026-03-01', NULL
+        ,'System', GETDATE(), 'System', GETDATE(), 1);
+END
+
+--End Account Module
+
+
 IF NOT EXISTS (SELECT 1 FROM dbo.Codes WHERE Name = 'ImportBatchStatus' AND CodeId = 1000)
 BEGIN
     INSERT INTO dbo.Codes (CodeId, Name, Description ,StartDate ,EndDate
            ,CreatedBy, CreatedDate, ModifiedBy, ModifiedDate, UpdateSeq)
-    VALUES (1000, 'ImportBatchStatus', '', '2026-03-01', NULL
+    VALUES (3001, 'ImportBatchStatus', '', '2026-03-01', NULL
         ,'System', GETDATE(), 'System', GETDATE(), 1);
 END
 
@@ -62,7 +217,7 @@ IF NOT EXISTS (SELECT 1 FROM dbo.Codes WHERE Name = 'TransactionStagingStatus' A
 BEGIN
     INSERT INTO dbo.Codes (CodeId, Name, Description ,StartDate ,EndDate
            ,CreatedBy, CreatedDate, ModifiedBy, ModifiedDate, UpdateSeq)
-    VALUES (1001, 'TransactionStagingStatus', '', '2026-03-01', NULL
+    VALUES (3002, 'TransactionStagingStatus', '', '2026-03-01', NULL
         ,'System', GETDATE(), 'System', GETDATE(), 1);
 END
 
@@ -104,7 +259,7 @@ IF NOT EXISTS (SELECT 1 FROM dbo.Codes WHERE Name = 'TransationStatusSourceType'
 BEGIN
     INSERT INTO dbo.Codes (CodeId, Name, Description ,StartDate ,EndDate
            ,CreatedBy, CreatedDate, ModifiedBy, ModifiedDate, UpdateSeq)
-    VALUES (1002, 'TransationStatusSourceType', '', '2026-03-01', NULL
+    VALUES (3003, 'TransationStatusSourceType', '', '2026-03-01', NULL
         ,'System', GETDATE(), 'System', GETDATE(), 1);
 END
 
@@ -163,7 +318,7 @@ IF NOT EXISTS (SELECT 1 FROM dbo.Codes WHERE Name = 'TransactionType' AND CodeId
 BEGIN
     INSERT INTO dbo.Codes (CodeId, Name, Description ,StartDate ,EndDate
            ,CreatedBy, CreatedDate, ModifiedBy, ModifiedDate, UpdateSeq)
-    VALUES (1003, 'TransactionType', '', '2026-03-01', NULL
+    VALUES (3004, 'TransactionType', '', '2026-03-01', NULL
         ,'System', GETDATE(), 'System', GETDATE(), 1);
 END
 
@@ -190,32 +345,6 @@ BEGIN
     INSERT INTO dbo.CodeValues(CodeId, CodeValue, Description, StartDate ,EndDate
            ,CreatedBy, CreatedDate, ModifiedBy, ModifiedDate, UpdateSeq)
     VALUES (@CodeId, 'TRAN', 'Transfer', '2026-03-01', NULL
-        ,'System', GETDATE(), 'System', GETDATE(), 1);
-END
-
-IF NOT EXISTS (SELECT 1 FROM dbo.Codes WHERE Name = 'AccountStatus' AND CodeId = 1004)
-BEGIN
-    INSERT INTO dbo.Codes (CodeId, Name, Description ,StartDate ,EndDate
-           ,CreatedBy, CreatedDate, ModifiedBy, ModifiedDate, UpdateSeq)
-    VALUES (1004 ,'AccountStatus', '', '2026-03-01', NULL
-        ,'System', GETDATE(), 'System', GETDATE(), 1);
-END
-
-SELECT @CodeId = CodeID FROM Codes WHERE Name ='AccountStatus';
-
-IF NOT EXISTS (SELECT 1 FROM dbo.CodeValues WHERE CodeValue = 'ACTV')
-BEGIN
-    INSERT INTO dbo.CodeValues(CodeId, CodeValue, Description, StartDate ,EndDate
-           ,CreatedBy, CreatedDate, ModifiedBy, ModifiedDate, UpdateSeq)
-    VALUES (@CodeId, 'ACTV', 'Active', '2026-03-01', NULL
-        ,'System', GETDATE(), 'System', GETDATE(), 1);
-END
-
-IF NOT EXISTS (SELECT 1 FROM dbo.CodeValues WHERE CodeValue = 'INAC')
-BEGIN
-    INSERT INTO dbo.CodeValues(CodeId, CodeValue, Description, StartDate ,EndDate
-           ,CreatedBy, CreatedDate, ModifiedBy, ModifiedDate, UpdateSeq)
-    VALUES (@CodeId, 'INAC', 'InActive', '2026-03-01', NULL
         ,'System', GETDATE(), 'System', GETDATE(), 1);
 END
 

@@ -12,8 +12,8 @@ using MyMoneyMate.Infrastructure;
 namespace MyMoneyMate.Infrastructure.Migrations
 {
     [DbContext(typeof(MyMoneyMateDBContext))]
-    [Migration("20260824133110_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20260824160441_Phase1-Migration")]
+    partial class Phase1Migration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,6 +38,13 @@ namespace MyMoneyMate.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("AccountNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("AccountSideId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("AccountSideValue")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("AccountTypeId")
@@ -103,16 +110,23 @@ namespace MyMoneyMate.Infrastructure.Migrations
                         {
                             AccountId = 1,
                             AccountName = "HDFC",
-                            AccountTypeId = 0,
-                            AccountTypeValue = "Savings Account",
+                            AccountNumber = "123456",
+                            AccountSideId = 1002,
+                            AccountSideValue = "ASST",
+                            AccountTypeId = 1002,
+                            AccountTypeValue = "Bank Account",
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2026, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreditLimit = 0m,
+                            CurrentBalance = 0m,
                             DisplayOrder = 1,
+                            Institution = "HDFC Bank",
+                            InterestRate = 0m,
                             ModifiedBy = "System",
                             ModifiedDate = new DateTime(2026, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OpeningBalance = 104847.59m,
-                            StatusId = 1,
+                            StartDate = new DateTime(2026, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StatusId = 1001,
                             StatusValue = "ACTV",
                             UpdateSeq = 1
                         });

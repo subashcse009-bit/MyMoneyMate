@@ -37,6 +37,13 @@ namespace MyMoneyMate.Infrastructure.Migrations
                     b.Property<string>("AccountNumber")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("AccountSideId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("AccountSideValue")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("AccountTypeId")
                         .HasColumnType("int");
 
@@ -100,16 +107,23 @@ namespace MyMoneyMate.Infrastructure.Migrations
                         {
                             AccountId = 1,
                             AccountName = "HDFC",
-                            AccountTypeId = 0,
-                            AccountTypeValue = "Savings Account",
+                            AccountNumber = "123456",
+                            AccountSideId = 1002,
+                            AccountSideValue = "ASST",
+                            AccountTypeId = 1002,
+                            AccountTypeValue = "Bank Account",
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2026, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreditLimit = 0m,
+                            CurrentBalance = 0m,
                             DisplayOrder = 1,
+                            Institution = "HDFC Bank",
+                            InterestRate = 0m,
                             ModifiedBy = "System",
                             ModifiedDate = new DateTime(2026, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OpeningBalance = 104847.59m,
-                            StatusId = 1,
+                            StartDate = new DateTime(2026, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StatusId = 1001,
                             StatusValue = "ACTV",
                             UpdateSeq = 1
                         });

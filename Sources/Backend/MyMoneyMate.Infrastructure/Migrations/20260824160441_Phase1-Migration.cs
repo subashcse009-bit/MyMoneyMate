@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MyMoneyMate.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class Phase1Migration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -28,6 +28,8 @@ namespace MyMoneyMate.Infrastructure.Migrations
                     InterestRate = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     MaturityDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    AccountSideId = table.Column<int>(type: "int", nullable: false),
+                    AccountSideValue = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DisplayOrder = table.Column<int>(type: "int", nullable: false),
                     StatusId = table.Column<int>(type: "int", nullable: true),
                     StatusValue = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -428,8 +430,8 @@ namespace MyMoneyMate.Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "Accounts",
-                columns: new[] { "AccountId", "AccountName", "AccountNumber", "AccountTypeId", "AccountTypeValue", "CreatedBy", "CreatedDate", "CreditLimit", "CurrentBalance", "DisplayOrder", "Institution", "InterestRate", "MaturityDate", "ModifiedBy", "ModifiedDate", "OpeningBalance", "StartDate", "StatusId", "StatusValue", "UpdateSeq" },
-                values: new object[] { 1, "HDFC", null, 0, "Savings Account", "System", new DateTime(2026, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0m, null, 1, null, null, null, "System", new DateTime(2026, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 104847.59m, null, 1, "ACTV", 1 });
+                columns: new[] { "AccountId", "AccountName", "AccountNumber", "AccountSideId", "AccountSideValue", "AccountTypeId", "AccountTypeValue", "CreatedBy", "CreatedDate", "CreditLimit", "CurrentBalance", "DisplayOrder", "Institution", "InterestRate", "MaturityDate", "ModifiedBy", "ModifiedDate", "OpeningBalance", "StartDate", "StatusId", "StatusValue", "UpdateSeq" },
+                values: new object[] { 1, "HDFC", "123456", 1002, "ASST", 1002, "Bank Account", "System", new DateTime(2026, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0m, 0m, 1, "HDFC Bank", 0m, null, "System", new DateTime(2026, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 104847.59m, new DateTime(2026, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1001, "ACTV", 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AccountBudgets_AccountId",
