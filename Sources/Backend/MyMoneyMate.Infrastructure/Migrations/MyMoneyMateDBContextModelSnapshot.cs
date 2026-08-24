@@ -111,7 +111,7 @@ namespace MyMoneyMate.Infrastructure.Migrations
                             AccountSideId = 1002,
                             AccountSideValue = "ASST",
                             AccountTypeId = 1002,
-                            AccountTypeValue = "Bank Account",
+                            AccountTypeValue = "BAAC",
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2026, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreditLimit = 0m,

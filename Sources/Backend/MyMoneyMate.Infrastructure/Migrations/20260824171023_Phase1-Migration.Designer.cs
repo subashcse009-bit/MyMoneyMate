@@ -12,7 +12,7 @@ using MyMoneyMate.Infrastructure;
 namespace MyMoneyMate.Infrastructure.Migrations
 {
     [DbContext(typeof(MyMoneyMateDBContext))]
-    [Migration("20260824160441_Phase1-Migration")]
+    [Migration("20260824171023_Phase1-Migration")]
     partial class Phase1Migration
     {
         /// <inheritdoc />
@@ -114,7 +114,7 @@ namespace MyMoneyMate.Infrastructure.Migrations
                             AccountSideId = 1002,
                             AccountSideValue = "ASST",
                             AccountTypeId = 1002,
-                            AccountTypeValue = "Bank Account",
+                            AccountTypeValue = "BAAC",
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2026, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreditLimit = 0m,

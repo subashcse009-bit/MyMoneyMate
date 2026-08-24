@@ -431,7 +431,7 @@ namespace MyMoneyMate.Infrastructure.Migrations
             migrationBuilder.InsertData(
                 table: "Accounts",
                 columns: new[] { "AccountId", "AccountName", "AccountNumber", "AccountSideId", "AccountSideValue", "AccountTypeId", "AccountTypeValue", "CreatedBy", "CreatedDate", "CreditLimit", "CurrentBalance", "DisplayOrder", "Institution", "InterestRate", "MaturityDate", "ModifiedBy", "ModifiedDate", "OpeningBalance", "StartDate", "StatusId", "StatusValue", "UpdateSeq" },
-                values: new object[] { 1, "HDFC", "123456", 1002, "ASST", 1002, "Bank Account", "System", new DateTime(2026, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0m, 0m, 1, "HDFC Bank", 0m, null, "System", new DateTime(2026, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 104847.59m, new DateTime(2026, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1001, "ACTV", 1 });
+                values: new object[] { 1, "HDFC", "123456", 1002, "ASST", 1002, "BAAC", "System", new DateTime(2026, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0m, 0m, 1, "HDFC Bank", 0m, null, "System", new DateTime(2026, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 104847.59m, new DateTime(2026, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1001, "ACTV", 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AccountBudgets_AccountId",
