@@ -841,9 +841,6 @@ namespace MyMoneyMate.Infrastructure.Migrations
                     b.Property<decimal>("ExpenseAmount")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("ImportBatchId")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("IncomeAmount")
                         .HasColumnType("decimal(18,2)");
 
@@ -859,6 +856,15 @@ namespace MyMoneyMate.Infrastructure.Migrations
 
                     b.Property<int>("RowNumber")
                         .HasColumnType("int");
+
+                    b.Property<int?>("SourceRefId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SourceTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SourceTypeValue")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("StatusId")
                         .HasColumnType("int");
@@ -876,8 +882,6 @@ namespace MyMoneyMate.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("TransactionStagingId");
-
-                    b.HasIndex("ImportBatchId");
 
                     b.ToTable("TransactionStaging");
                 });
@@ -943,17 +947,6 @@ namespace MyMoneyMate.Infrastructure.Migrations
                     b.Navigation("Account");
 
                     b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("MyMoneyMate.Domain.TransactionStaging", b =>
-                {
-                    b.HasOne("MyMoneyMate.Domain.ImportBatch", "ImportBatch")
-                        .WithMany()
-                        .HasForeignKey("ImportBatchId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ImportBatch");
                 });
 #pragma warning restore 612, 618
         }

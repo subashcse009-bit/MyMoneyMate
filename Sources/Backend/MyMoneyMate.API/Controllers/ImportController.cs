@@ -33,4 +33,11 @@ public class ImportController : ControllerBase
         await _validateService.ValidateTransactionStages(batchId);
         return Ok(new { Message = "Validation completed." });
     }
+
+    [HttpPost("PromoteTransactions")]
+    public async Task<IActionResult> PromoteTransactions(int batchId)
+    {
+        await _service.PromoteTransactionsAsync(batchId);
+        return Ok(new { Message = "Transactions promoted successfully." });
+    }
 }

@@ -12,6 +12,7 @@ namespace MyMoneyMate.Application.Repository.IRepository
         Task SaveAsync(TransactionStaging entity);
         Task<IEnumerable<TransactionStaging>> GetByBatchIdAsync(int batchId);
         Task<IEnumerable<TransactionStaging>> GetPendingAndInvalidTransactionStages(int batchId);
+        Task<IEnumerable<TransactionStaging>> GetByBatchIdAndStatusAsync(int batchId, string statusId);
         Task DeleteByBatchIdAsync(int batchId);
         Task UpdateAsync(TransactionStaging entity);
         Task DeleteAsync(TransactionStaging entity);

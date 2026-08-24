@@ -28,13 +28,13 @@ namespace MyMoneyMate.Infrastructure.Repositories
 
         public async Task<IEnumerable<TransactionStaging>> GetByBatchIdAsync(int batchId)
         {
-            return await _context.TransactionStaging.Where(ts => ts.ImportBatchId == batchId).ToListAsync();
+            return await _context.TransactionStaging.Where(ts => ts.SourceRefId == batchId).ToListAsync();
         }
 
         public async Task<IEnumerable<TransactionStaging>> GetPendingAndInvalidTransactionStages(int batchId)
         {
             return await _context.TransactionStaging
-                .Where(ts => (ts.ImportBatchId == batchId) && (ts.StatusValue == "PEND" || ts.StatusValue == "INVD"))
+                .Where(ts => (ts.SourceRefId == batchId) && (ts.StatusValue == "PEND" || ts.StatusValue == "INVD"))
                 .ToListAsync();
         }
 
@@ -64,8 +64,15 @@ namespace MyMoneyMate.Infrastructure.Repositories
 
         public async Task DeleteByBatchIdAsync(int batchId)
         {
-            _context.TransactionStaging.RemoveRange(_context.TransactionStaging.Where(ts => ts.ImportBatchId == batchId));
+            _context.TransactionStaging.RemoveRange(_context.TransactionStaging.Where(ts => ts.SourceRefId == batchId));
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<TransactionStaging>> GetByBatchIdAndStatusAsync(int batchId, string statusId)
+        {
+            return await _context.TransactionStaging
+                .Where(ts => (ts.SourceRefId == batchId) && (ts.StatusValue == statusId))
+                .ToListAsync();
         }
     }
 }

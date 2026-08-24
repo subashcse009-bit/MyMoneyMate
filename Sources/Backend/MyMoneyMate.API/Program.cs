@@ -26,6 +26,9 @@ builder.Services.AddScoped<ImportService>();
 builder.Services.AddScoped<ValidateService>();
 builder.Services.AddScoped<ITransactionStageRepository, TransactionStageRepository>();
 builder.Services.AddScoped<IImportBatchRepository, ImportBatchRepository>();
+builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
+builder.Services.AddScoped<IAccountRepository, AccountRepository>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
 builder.Services.AddSingleton<DbConnectionFactory>();
 

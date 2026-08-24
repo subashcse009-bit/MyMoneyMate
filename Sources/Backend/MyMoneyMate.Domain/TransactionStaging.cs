@@ -12,12 +12,7 @@ namespace MyMoneyMate.Domain
     {
         [Key]
         public int TransactionStagingId { get; set; }
-
-        public int ImportBatchId { get; set; }
-
-        [ForeignKey("ImportBatchId")]
-        public ImportBatch ImportBatch { get; set; }
-
+                
         public int RowNumber { get; set; }
 
         public DateTime TransactionDate { get; set; }
@@ -38,6 +33,13 @@ namespace MyMoneyMate.Domain
 
         //Account Not Found, Category Not Found, Amount Invalid
         public string? ValidationMessage { get; set; }
+        
+        public int? SourceTypeId { get; set; }
+
+        //ImportBatch, Manual, BankSync, BrokerFeed, ScheduledTransaction, Migration
+        public string? SourceTypeValue { get; set; }
+
+        public int? SourceRefId { get; set; }
 
         public int? StatusId { get; set; }
         

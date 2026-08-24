@@ -11,10 +11,16 @@ namespace MyMoneyMate.Application.Services
     {
         private readonly ITransactionStageRepository _transactionStageRepository;
         private readonly IImportBatchRepository _importBatchRepository;
-        public ValidateService(ITransactionStageRepository transactionStageRepository, IImportBatchRepository importBatchRepository)
+
+        private readonly IAccountRepository _accountRepository;
+        private readonly ICategoryRepository _categoryRepository;
+        public ValidateService(ITransactionStageRepository transactionStageRepository, 
+            IImportBatchRepository importBatchRepository, IAccountRepository accountRepository, ICategoryRepository categoryRepository)
         {
             _transactionStageRepository = transactionStageRepository;
             _importBatchRepository = importBatchRepository;
+            _accountRepository = accountRepository;
+            _categoryRepository = categoryRepository;
         }
 
 
@@ -49,6 +55,29 @@ namespace MyMoneyMate.Application.Services
                             transaction.ValidationMessage = "Account Name is required.";
                             transaction.StatusValue = "INVD";
                         }
+                        else if (!string.IsNullOrEmpty(transaction.AccountName))
+                        {
+                            var account = await _accountRepository.GetByNameAsync(transaction.AccountName);
+                            if (account == null)
+                            {
+                                transaction.ValidationMessage = "Invalid Account Name.";
+                                transaction.StatusValue = "INVD";
+                            }
+                        }
+                        else if (string.IsNullOrEmpty(transaction.CategoryName))
+                        {
+                            transaction.ValidationMessage = "Category Name is required.";
+                            transaction.StatusValue = "INVD";
+                        }
+                        else if (!string.IsNullOrEmpty(transaction.CategoryName))
+                        {
+                            var category = await _categoryRepository.GetByNameAsync(transaction.CategoryName);
+                            if (category == null)
+                            {
+                                transaction.ValidationMessage = "Invalid Category Name.";
+                                transaction.StatusValue = "INVD";
+                            }
+                        }
                         else if (transaction.ExpenseAmount == 0 && transaction.IncomeAmount == 0)
                         {
                             transaction.ValidationMessage = "Either Expense Amount or Income Amount must be positive.";
@@ -57,11 +86,6 @@ namespace MyMoneyMate.Application.Services
                         else if (transaction.ExpenseAmount > 0 && transaction.IncomeAmount > 0)
                         {
                             transaction.ValidationMessage = "Both Expense Amount and Income Amount cannot be positive.";
-                            transaction.StatusValue = "INVD";
-                        }
-                        else if (string.IsNullOrEmpty(transaction.CategoryName))
-                        {
-                            transaction.ValidationMessage = "Category Name is required.";
                             transaction.StatusValue = "INVD";
                         }
                         //else if (await _transactionStageRepository.DuplicateAsync(transaction))
