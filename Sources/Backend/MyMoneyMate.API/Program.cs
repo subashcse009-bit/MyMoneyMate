@@ -24,6 +24,7 @@ builder.Services.AddDbContext<MyMoneyMateDBContext>(options =>
 
 builder.Services.AddScoped<ImportService>();
 builder.Services.AddScoped<ValidateService>();
+builder.Services.AddScoped<AccountService>();
 builder.Services.AddScoped<ITransactionStageRepository, TransactionStageRepository>();
 builder.Services.AddScoped<IImportBatchRepository, ImportBatchRepository>();
 builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
@@ -36,7 +37,18 @@ builder.Services.AddSingleton<DbConnectionFactory>();
 builder.Services.AddTransient<IImporter, ExcelImporter>();
 builder.Services.AddTransient<IImporter, CSVImporter>();
 
+// Register CORS policy
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAngularApp",
+        policy => policy.WithOrigins("http://localhost:4200") // Angular dev server
+                        .AllowAnyHeader()
+                        .AllowAnyMethod());
+});
+
 var app = builder.Build();
+
+app.UseCors("AllowAngularApp");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
