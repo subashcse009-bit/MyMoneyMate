@@ -17,6 +17,11 @@ namespace MyMoneyMate.Infrastructure.Repositories
             _context = context;
         }
 
+        public async Task<IEnumerable<Account>> GetAllAsync()
+        {
+            return await _context.Accounts.Where(a => a.StatusValue == "ACTV").ToListAsync();
+        }
+
         public async Task<Account> GetByNameAsync(string name)
         {
             return await _context.Accounts.FirstOrDefaultAsync(a => a.AccountName == name && a.StatusValue == "ACTV");
