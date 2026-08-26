@@ -14,7 +14,7 @@ namespace MyMoneyMate.Application.Services
 
         private readonly IAccountRepository _accountRepository;
         private readonly ICategoryRepository _categoryRepository;
-        public ValidateService(ITransactionStageRepository transactionStageRepository, 
+        public ValidateService(ITransactionStageRepository transactionStageRepository,
             IImportBatchRepository importBatchRepository, IAccountRepository accountRepository, ICategoryRepository categoryRepository)
         {
             _transactionStageRepository = transactionStageRepository;
@@ -23,95 +23,113 @@ namespace MyMoneyMate.Application.Services
             _categoryRepository = categoryRepository;
         }
 
-
         public async Task ValidateTransactionStages(int batchId)
         {
-            try
+            var stages = (await _transactionStageRepository.GetPendingAndInvalidTransactionStages(batchId)).Where(t => t != null).ToList();
+
+            var accountCache = new Dictionary<string, object?>(StringComparer.OrdinalIgnoreCase);
+            var categoryCache = new Dictionary<string, object?>(StringComparer.OrdinalIgnoreCase);
+
+            foreach (var t in stages)
             {
-                var lstTransactionStaging = (await _transactionStageRepository.GetPendingAndInvalidTransactionStages(batchId)).ToList();
+                string status = "VALD";
+                string message = string.Empty;
 
-                foreach (var transaction in lstTransactionStaging)
+                // Robust TransactionDate handling (supports DateTime or string-backed)
+                DateTime? parsedDate = null;
+                if (t.TransactionDate is DateTime dt) parsedDate = dt;
+                else if (DateTime.TryParse(t.TransactionDate.ToString(), out var tmp)) parsedDate = tmp;
+
+                if (!parsedDate.HasValue)
                 {
-                    if (transaction != null)
+                    message = "Invalid Transaction Date format.";
+                    status = "INVD";
+                }
+                else if (parsedDate.Value == DateTime.MinValue)
+                {
+                    message = "Transaction Date is required.";
+                    status = "INVD";
+                }
+                else if (parsedDate.Value > DateTime.UtcNow)
+                {
+                    message = "Transaction Date cannot be in the future.";
+                    status = "INVD";
+                }
+
+                // Account validation with caching
+                if (status == "VALD")
+                {
+                    if (string.IsNullOrWhiteSpace(t.AccountName))
                     {
-                        if (!DateTime.TryParse(transaction.TransactionDate.ToString(), out DateTime parsedDate))
+                        message = "Account Name is required.";
+                        status = "INVD";
+                    }
+                    else
+                    {
+                        if (!accountCache.TryGetValue(t.AccountName, out var account))
                         {
-                            transaction.ValidationMessage = "INVD Transaction Date format.";
-                            transaction.StatusValue = "INVD";
+                            account = await _accountRepository.GetByNameAsync(t.AccountName);
+                            accountCache[t.AccountName] = account;
                         }
-                        else if (transaction.TransactionDate == DateTime.MinValue)
-                        {
-                            transaction.ValidationMessage = "Transaction Date is required.";
 
-                            transaction.StatusValue = "INVD";
-                        }
-                        else if (transaction.TransactionDate > DateTime.UtcNow)
+                        if (account == null)
                         {
-                            transaction.ValidationMessage = "Transaction Date cannot be in the future.";
-                            transaction.StatusValue = "INVD";
+                            message = "Invalid Account Name.";
+                            status = "INVD";
                         }
-                        else if (string.IsNullOrEmpty(transaction.AccountName))
-                        {
-                            transaction.ValidationMessage = "Account Name is required.";
-                            transaction.StatusValue = "INVD";
-                        }
-                        else if (!string.IsNullOrEmpty(transaction.AccountName))
-                        {
-                            var account = await _accountRepository.GetByNameAsync(transaction.AccountName);
-                            if (account == null)
-                            {
-                                transaction.ValidationMessage = "Invalid Account Name.";
-                                transaction.StatusValue = "INVD";
-                            }
-                        }
-                        else if (string.IsNullOrEmpty(transaction.CategoryName))
-                        {
-                            transaction.ValidationMessage = "Category Name is required.";
-                            transaction.StatusValue = "INVD";
-                        }
-                        else if (!string.IsNullOrEmpty(transaction.CategoryName))
-                        {
-                            var category = await _categoryRepository.GetByNameAsync(transaction.CategoryName);
-                            if (category == null)
-                            {
-                                transaction.ValidationMessage = "Invalid Category Name.";
-                                transaction.StatusValue = "INVD";
-                            }
-                        }
-                        else if (transaction.ExpenseAmount == 0 && transaction.IncomeAmount == 0)
-                        {
-                            transaction.ValidationMessage = "Either Expense Amount or Income Amount must be positive.";
-                            transaction.StatusValue = "INVD";
-                        }
-                        else if (transaction.ExpenseAmount > 0 && transaction.IncomeAmount > 0)
-                        {
-                            transaction.ValidationMessage = "Both Expense Amount and Income Amount cannot be positive.";
-                            transaction.StatusValue = "INVD";
-                        }
-                        //else if (await _transactionStageRepository.DuplicateAsync(transaction))
-                        //{
-                        //    transaction.ValidationMessage = "Duplicate transaction found.";
-                        //    transaction.StatusValue = "INVD";
-                        //}
-                        else
-                        {
-                            transaction.ValidationMessage = string.Empty;
-                            transaction.StatusValue = "VALD";
-                        }
-                        transaction.ModifiedBy = "System";
-                        transaction.ModifiedDate = DateTime.Now;
-                        transaction.UpdateSeq += 1;
-
-                        _transactionStageRepository.UpdateAsync(transaction);
                     }
                 }
 
-                await _importBatchRepository.UpdateBatchStatusAsync(batchId);
+                // Category validation with caching
+                if (status == "VALD")
+                {
+                    if (string.IsNullOrWhiteSpace(t.CategoryName))
+                    {
+                        message = "Category Name is required.";
+                        status = "INVD";
+                    }
+                    else
+                    {
+                        if (!categoryCache.TryGetValue(t.CategoryName, out var category))
+                        {
+                            category = await _categoryRepository.GetByNameAsync(t.CategoryName);
+                            categoryCache[t.CategoryName] = category;
+                        }
+
+                        if (category == null)
+                        {
+                            message = "Invalid Category Name.";
+                            status = "INVD";
+                        }
+                    }
+                }
+                
+                // Amount validation
+                if (status == "VALD")
+                {
+                    if (t.ExpenseAmount == 0 && t.IncomeAmount == 0)
+                    {
+                        message = "Either Expense Amount or Income Amount must be positive.";
+                        status = "INVD";
+                    }
+                    else if (t.ExpenseAmount > 0 && t.IncomeAmount > 0)
+                    {
+                        message = "Both Expense Amount and Income Amount cannot be positive.";
+                        status = "INVD";
+                    }
+                }
+
+                // Persist changes (await to avoid overlapping DbContext operations)
+                t.ValidationMessage = message;
+                t.StatusValue = status;
+                t.ModifiedBy = "System";
+                t.ModifiedDate = DateTime.UtcNow;
+                t.UpdateSeq += 1;
+
+                await _transactionStageRepository.UpdateAsync(t);
             }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+
+            await _importBatchRepository.UpdateBatchStatusAsync(batchId);
         }
     }
 }
