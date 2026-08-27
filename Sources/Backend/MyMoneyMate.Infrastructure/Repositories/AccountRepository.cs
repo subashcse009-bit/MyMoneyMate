@@ -22,9 +22,20 @@ namespace MyMoneyMate.Infrastructure.Repositories
             return await _context.Accounts.Where(a => a.StatusValue == "ACTV").ToListAsync();
         }
 
+        public async Task<Account> GetById(int id)
+        {
+            return await _context.Accounts.FirstOrDefaultAsync(a => a.AccountId == id && a.StatusValue == "ACTV");
+        }
+
         public async Task<Account> GetByNameAsync(string name)
         {
             return await _context.Accounts.FirstOrDefaultAsync(a => a.AccountName == name && a.StatusValue == "ACTV");
+        }
+
+        public async Task UpdateAccountCurrentBalanceAsync(Account account)
+        {
+            _context.Accounts.Update(account);
+            await _context.SaveChangesAsync();
         }
     }
 }

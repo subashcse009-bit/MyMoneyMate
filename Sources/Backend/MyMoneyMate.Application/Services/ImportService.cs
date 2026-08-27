@@ -12,18 +12,18 @@ namespace MyMoneyMate.Application.Services
     public class ImportService
     {
         private readonly IEnumerable<IImporter> _importers;
-        private readonly ITransactionStageRepository _repository;
+        private readonly ITransactionStageRepository _transactionStageRepository;
         private readonly IImportBatchRepository _importBatchRepository;
         private readonly ITransactionRepository _transactionRepository;
         private readonly IAccountRepository _accountRepository;
         private readonly ICategoryRepository _categoryRepository;
 
-        public ImportService(IEnumerable<IImporter> importers, ITransactionStageRepository repository,
+        public ImportService(IEnumerable<IImporter> importers, ITransactionStageRepository transactionStageRepository,
             IImportBatchRepository importBatchRepository, ITransactionRepository transactionRepository,
             IAccountRepository accountRepository, ICategoryRepository categoryRepository)
         {
             _importers = importers;
-            _repository = repository;
+            _transactionStageRepository = transactionStageRepository;
             _importBatchRepository = importBatchRepository;
             _transactionRepository = transactionRepository;
             _accountRepository = accountRepository;
@@ -37,7 +37,7 @@ namespace MyMoneyMate.Application.Services
             var importBatch = new ImportBatch
             {
                 FileName = fileName,
-                StatusId = 1000,
+                StatusId = 3001,
                 StatusValue = "PEND",
                 CreatedBy = "System",
                 CreatedDate = DateTime.Now,
@@ -63,10 +63,10 @@ namespace MyMoneyMate.Application.Services
                     ExpenseAmount = row.ExpenseAmount,
                     CategoryName = row.Category,
                     AccountName = row.Account,
-                    SourceTypeId = 1002,
+                    SourceTypeId = 3003,
                     SourceTypeValue = "IMBT",
                     SourceRefId = importBatchId,
-                    StatusId = 1001,
+                    StatusId = 3002,
                     StatusValue = "PEND",
                     CreatedBy = "System",
                     CreatedDate = DateTime.Now,
@@ -75,7 +75,7 @@ namespace MyMoneyMate.Application.Services
                     UpdateSeq = 1
                 };
 
-                await _repository.SaveAsync(stage);
+                await _transactionStageRepository.SaveAsync(stage);
             }
 
             return batchId;
@@ -83,39 +83,93 @@ namespace MyMoneyMate.Application.Services
 
         public async Task PromoteTransactionsAsync(int batchId)
         {
-            var stagingTransactions = await _repository.GetByBatchIdAndStatusAsync(batchId, "VALD");
-            foreach (var stage in stagingTransactions)
+            var stagingTransactions = (await _transactionStageRepository.GetByBatchIdAndStatusAsync(batchId, "VALD"))?.ToList() ?? new List<TransactionStaging>();
+
+            if (!stagingTransactions.Any()) return;
+
+            // Filter out already promoted and collect unique names
+            var toProcess = stagingTransactions.Where(s => s.StatusValue != "PRMD").ToList();
+
+            if (!toProcess.Any()) return;
+
+            var accountNames = toProcess.Select(s => s.AccountName).Where(n => !string.IsNullOrWhiteSpace(n)).Distinct().ToList();
+            var categoryNames = toProcess.Select(s => s.CategoryName).Where(n => !string.IsNullOrWhiteSpace(n)).Distinct().ToList();
+
+            // Prefetch accounts and categories in parallel to reduce DB roundtrips
+            var accountTasks = accountNames.ToDictionary(n => n, n => _accountRepository.GetByNameAsync(n));
+            var categoryTasks = categoryNames.ToDictionary(n => n, n => _categoryRepository.GetByNameAsync(n));
+
+            var accountsByName = accountTasks.ToDictionary(kv => kv.Key, kv => kv.Value.Result);
+            var categoriesByName = categoryTasks.ToDictionary(kv => kv.Key, kv => kv.Value.Result);
+
+            foreach (var stage in toProcess)
             {
-                if (stage.StatusValue == "PRMD")
+                try
                 {
-                    continue;
+                    accountsByName.TryGetValue(stage.AccountName, out var account);
+                    categoriesByName.TryGetValue(stage.CategoryName, out var category);
+
+                    if (account == null || category == null)
+                    {
+                        // Mark as error and continue
+                        stage.StatusValue = "INVD";
+                        stage.StatusId = 3002; // keep an error code or adapt to your domain constants
+                        stage.ValidationMessage = "Invalid transaction data";
+                        stage.ModifiedDate = DateTime.Now;
+                        stage.ModifiedBy = "System";
+                        await _transactionStageRepository.UpdateAsync(stage);
+                        continue;
+                    }
+
+                    var transaction = CreateTransaction(stage, account.AccountId, category.CategoryId);
+
+                    await _transactionRepository.SaveAsync(transaction);
+
+                    // Update account balance using the prefetched account instance
+                    if (transaction.TransactionTypeValue == "INCO")
+                    {
+                        account.CurrentBalance += transaction.Amount;
+                    }
+                    else
+                    {
+                        account.CurrentBalance -= transaction.Amount;
+                    }
+
+                    await _accountRepository.UpdateAccountCurrentBalanceAsync(account);
+
+                    // After successful promotion, update staging status
+                    stage.StatusId = 3002; // keep existing numeric mapping if required by domain
+                    stage.StatusValue = "PRMD";
+                    stage.ModifiedDate = DateTime.Now;
+                    stage.ModifiedBy = "System";
+                    await _transactionStageRepository.UpdateAsync(stage);
                 }
-                var account = await _accountRepository.GetByNameAsync(stage.AccountName);
-                var category = await _categoryRepository.GetByNameAsync(stage.CategoryName);
-
-                var transaction = CreateTransaction(stage, account.AccountId, category.CategoryId);
-
-                await _transactionRepository.SaveAsync(transaction);
-
-                // After promoting, you might want to update the status of the staging record
-                stage.StatusId = 1001; // Assuming 1001 is the status for promoted
-                stage.StatusValue = "PRMD";
-                await _repository.UpdateAsync(stage);
+                catch
+                {
+                    // If a stage fails, mark it as error and continue with others
+                    stage.StatusValue = "INVD";
+                    stage.StatusId = 3002;
+                    stage.ValidationMessage = "Invalid transaction data";
+                    stage.ModifiedDate = DateTime.Now;
+                    stage.ModifiedBy = "System";
+                    try { await _transactionStageRepository.UpdateAsync(stage); } catch { /* swallow to avoid cascading failures */ }
+                }
             }
         }
 
         private Transaction CreateTransaction(TransactionStaging staging, int accountId, int categoryId)
         {
+            var isExpense = staging.ExpenseAmount > 0;
             return new Transaction
             {
                 TransactionDate = staging.TransactionDate,
                 EffectiveDate = staging.TransactionDate,
                 AccountId = accountId,
                 CategoryId = categoryId,
-                Amount = staging.ExpenseAmount > 0 ? staging.ExpenseAmount : staging.IncomeAmount,
-                TransactionTypeValue = staging.ExpenseAmount > 0 ? "INCO" : "EXPE",
+                Amount = isExpense ? staging.ExpenseAmount : staging.IncomeAmount,
+                TransactionTypeValue = isExpense ? "EXPE" : "INCO",
                 Description = staging.Description,
-                StatusId = 1004,
+                StatusId = 4002,
                 StatusValue = "ACTV",
                 CreatedBy = staging.CreatedBy,
                 CreatedDate = DateTime.Now,

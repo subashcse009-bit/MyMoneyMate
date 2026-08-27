@@ -9,8 +9,11 @@ namespace MyMoneyMate.Application.Repository.IRepository
 {
     public interface IAccountRepository
     {
+        Task<Account> GetById(int id);
         Task<Account> GetByNameAsync(string name);
 
         Task<IEnumerable<Account>> GetAllAsync();
+
+        Task UpdateAccountCurrentBalanceAsync(Account account);
     }
 }
