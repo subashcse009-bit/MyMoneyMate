@@ -95,12 +95,34 @@ namespace MyMoneyMate.Application.Services
             var accountNames = toProcess.Select(s => s.AccountName).Where(n => !string.IsNullOrWhiteSpace(n)).Distinct().ToList();
             var categoryNames = toProcess.Select(s => s.CategoryName).Where(n => !string.IsNullOrWhiteSpace(n)).Distinct().ToList();
 
-            // Prefetch accounts and categories in parallel to reduce DB roundtrips
-            var accountTasks = accountNames.ToDictionary(n => n, n => _accountRepository.GetByNameAsync(n));
-            var categoryTasks = categoryNames.ToDictionary(n => n, n => _categoryRepository.GetByNameAsync(n));
+            var accountsByName = new Dictionary<string, Account>(StringComparer.OrdinalIgnoreCase);
+            foreach (var name in accountNames)
+            {
+                try
+                {
+                    var acct = await _accountRepository.GetByNameAsync(name);
+                    if (acct != null) accountsByName[name] = acct;
+                }
+                catch
+                {
+                    // optionally log lookup failure; treat as missing later
+                }
+            }
 
-            var accountsByName = accountTasks.ToDictionary(kv => kv.Key, kv => kv.Value.Result);
-            var categoriesByName = categoryTasks.ToDictionary(kv => kv.Key, kv => kv.Value.Result);
+            // Fetch categories sequentially to avoid concurrent DbContext usage
+            var categoriesByName = new Dictionary<string, Category>(StringComparer.OrdinalIgnoreCase);
+            foreach (var name in categoryNames)
+            {
+                try
+                {
+                    var cat = await _categoryRepository.GetByNameAsync(name);
+                    if (cat != null) categoriesByName[name] = cat;
+                }
+                catch
+                {
+                    // optionally log lookup failure; treat as missing later
+                }
+            }
 
             foreach (var stage in toProcess)
             {
@@ -121,18 +143,24 @@ namespace MyMoneyMate.Application.Services
                         continue;
                     }
 
+                    // Use opening balance as current balance when current is zero
+                    if (account.CurrentBalance == 0)
+                    {
+                        account.CurrentBalance = account.OpeningBalance;
+                    }
+
                     var transaction = CreateTransaction(stage, account.AccountId, category.CategoryId);
 
                     await _transactionRepository.SaveAsync(transaction);
 
                     // Update account balance using the prefetched account instance
-                    if (transaction.TransactionTypeValue == "INCO")
+                    if (string.Equals(transaction.TransactionTypeValue, "EXPE", StringComparison.OrdinalIgnoreCase))
                     {
-                        account.CurrentBalance += transaction.Amount;
+                        account.CurrentBalance -= transaction.Amount;
                     }
                     else
                     {
-                        account.CurrentBalance -= transaction.Amount;
+                        account.CurrentBalance += transaction.Amount;
                     }
 
                     await _accountRepository.UpdateAccountCurrentBalanceAsync(account);

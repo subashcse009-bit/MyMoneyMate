@@ -35,8 +35,8 @@ namespace MyMoneyMate.Application.Import
                     Account = sheet.Cells[row, 2].Text,
                     Category = sheet.Cells[row, 3].Text,
                     Description = sheet.Cells[row, 4].Text,
-                    IncomeAmount = Convert.ToDecimal(sheet.Cells[row, 6].Value),
-                    ExpenseAmount = Convert.ToDecimal(sheet.Cells[row, 7].Value)
+                    ExpenseAmount = Convert.ToDecimal(sheet.Cells[row, 6].Value),
+                    IncomeAmount = Convert.ToDecimal(sheet.Cells[row, 7].Value)
                 });
             }
 

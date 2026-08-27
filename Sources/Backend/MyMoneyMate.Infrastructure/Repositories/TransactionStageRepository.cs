@@ -71,8 +71,8 @@ namespace MyMoneyMate.Infrastructure.Repositories
         public async Task<IEnumerable<TransactionStaging>> GetByBatchIdAndStatusAsync(int batchId, string statusId)
         {
             return await _context.TransactionStaging
-                .Where(ts => (ts.SourceRefId == batchId) && (ts.StatusValue == statusId))
-                .ToListAsync();
+                .Where(ts => (ts.SourceRefId == batchId) && (ts.StatusValue == statusId)).
+                OrderBy(ts => ts.TransactionDate).ToListAsync();
         }
     }
 }
