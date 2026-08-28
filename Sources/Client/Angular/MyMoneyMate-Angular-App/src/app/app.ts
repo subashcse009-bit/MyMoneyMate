@@ -1,21 +1,17 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { AccountComponent } from './components/account-component/account-component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  standalone: true,
+  imports: [AccountComponent,MatCardModule,MatFormFieldModule],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
 export class App {
-  constructor(private http: HttpClient) {}
-   private apiUrl = 'https://localhost:7021/api/accounts/'; // Replace with your API endpoint
   protected readonly title = signal('MyMoneyMate-Angular-App');
-
-  ngOnInit(): void {
-    this.http.get(this.apiUrl + "GetList").subscribe((data) => {
-      console.log(data);
-    });
-  }
 }
