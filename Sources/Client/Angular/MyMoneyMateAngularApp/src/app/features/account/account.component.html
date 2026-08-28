@@ -1,0 +1,109 @@
+<div class="p-4">
+
+  <!-- Top Row: KPI Cards -->
+  <mat-grid-list cols="4" rowHeight="120px" gutterSize="16px">
+    <mat-grid-tile>
+      <mat-card class="mat-elevation-z2 text-center">
+        <mat-card-content>
+          <h6>Total Assets</h6>
+          <h4>₹1,20,000</h4>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-card class="mat-elevation-z2 text-center">
+        <mat-card-content>
+          <h6>Total Liabilities</h6>
+          <h4>₹40,000</h4>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-card class="mat-elevation-z2 text-center">
+        <mat-card-content>
+          <h6>Net Worth</h6>
+          <h4>₹80,000</h4>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-card class="mat-elevation-z2 text-center">
+        <mat-card-content>
+          <h6>Total Active Accounts</h6>
+          <h4>12</h4>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+  <!-- Middle Row -->
+  <mat-grid-list cols="3" rowHeight="300px" gutterSize="16px" class="mt-4">
+    <!-- Account Overview Grid -->
+    <mat-grid-tile>
+      <mat-card class="mat-elevation-z2">
+        <mat-card-header>
+          <mat-card-title>Account Overview</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <table mat-table class="mat-elevation-z1" matSort>            
+            <tr>
+                <td>Account Name</td>
+                <td>Opening Balance</td>
+          </tr>
+            @for (acc of accounts; track $index) {
+                <tr>
+                    <td>{{acc.accountName}}</td>
+                    <td>{{acc.openingBalance}}</td>
+                </tr>
+            }
+          </table>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+    <!-- Asset Allocation -->
+    <mat-grid-tile>
+      <mat-card class="mat-elevation-z2">
+        <mat-card-header>
+          <mat-card-title>Asset Allocation</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="text-center">[Pie Chart Here]</div>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+    <!-- Account Balance Trend -->
+    <mat-grid-tile>
+      <mat-card class="mat-elevation-z2">
+        <mat-card-header>
+          <mat-card-title>Balance Trend</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="text-center">[Line Chart Here]</div>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+  <!-- Bottom Row: Account Type Summary KPI Cards -->
+  <mat-grid-list cols="2" rowHeight="120px" gutterSize="16px" class="mt-4">
+    <mat-grid-tile>
+      <mat-card class="mat-elevation-z2 text-center">
+        <mat-card-content>
+          <h6>Bank Accounts</h6>
+          <h4>₹50,000</h4>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-card class="mat-elevation-z2 text-center">
+        <mat-card-content>
+          <h6>Mutual Funds</h6>
+          <h4>₹30,000</h4>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+</div>
