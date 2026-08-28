@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AccountService } from '../../services/account';
 import { Account } from '../../models/account';
@@ -10,6 +10,7 @@ import { Account } from '../../models/account';
     CommonModule
   ],
   templateUrl: './account-component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './account-component.scss'
 })
 

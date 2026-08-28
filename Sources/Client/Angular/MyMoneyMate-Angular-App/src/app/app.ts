@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, ChangeDetectionStrategy } from '@angular/core';
 import { AccountComponent } from './components/account-component/account-component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -10,6 +10,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   standalone: true,
   imports: [AccountComponent,MatCardModule,MatFormFieldModule],
   templateUrl: './app.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './app.scss'
 })
 export class App {
