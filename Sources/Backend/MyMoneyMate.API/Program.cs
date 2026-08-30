@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using MyMoneyMate.API.Middleware;
 using MyMoneyMate.Application.Import;
 using MyMoneyMate.Application.Repository;
 using MyMoneyMate.Application.Repository.IRepository;
@@ -7,6 +8,7 @@ using MyMoneyMate.Infrastructure;
 using MyMoneyMate.Infrastructure.Data;
 using MyMoneyMate.Infrastructure.Repositories;
 using OfficeOpenXml;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -46,6 +48,13 @@ builder.Services.AddCors(options =>
                         .AllowAnyMethod());
 });
 
+builder.Host.UseSerilog((context, configuration) => 
+{
+    configuration
+       .ReadFrom.Configuration(context.Configuration)
+       .Enrich.FromLogContext();
+});
+
 var app = builder.Build();
 
 app.UseCors("AllowAngularApp");
@@ -56,6 +65,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<LoggerMiddleware>();
 
 app.UseHttpsRedirection();
 

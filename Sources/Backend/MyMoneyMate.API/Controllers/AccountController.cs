@@ -9,16 +9,20 @@ namespace MyMoneyMate.API.Controllers
     public class AccountController : ControllerBase
     {
         private readonly AccountService _service;
+        private readonly ILogger<AccountController> _logger;
 
-        public AccountController(AccountService service)
+        public AccountController(AccountService service, ILogger<AccountController> logger)
         {
             _service = service;
+            _logger = logger;
         }
 
         [HttpGet("GetList")]
         public async Task<IActionResult> GetList()
         {
             var accounts = await _service.GetList();
+
+            _logger.LogInformation("Total Accounts");
 
             return Ok(new
             {
