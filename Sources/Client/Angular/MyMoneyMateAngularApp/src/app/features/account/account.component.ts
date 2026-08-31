@@ -12,8 +12,9 @@ import { MatChip } from '@angular/material/chips';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDividerModule } from '@angular/material/divider';
-  import { MatToolbarModule } from '@angular/material/toolbar';
-  import {MatExpansionModule} from '@angular/material/expansion';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import {MatExpansionModule} from '@angular/material/expansion';  
+import {MatGridListModule} from '@angular/material/grid-list';
 
 export interface Account {
   id: number;
@@ -43,7 +44,8 @@ export interface Account {
     MatTooltipModule,
     MatDividerModule,
     MatToolbarModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatGridListModule
   ],
   templateUrl: './account.component.html',
   styleUrl: './account.component.scss',
