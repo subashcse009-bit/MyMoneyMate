@@ -7,16 +7,12 @@
 
 html {
   height: 100%;
-  @include mat.theme(
-    (
-      color: (
-        primary: mat.$azure-palette,
+  @include mat.theme((color: (primary: mat.$azure-palette,
         tertiary: mat.$blue-palette,
       ),
       typography: Roboto,
       density: 0,
-    )
-  );
+    ));
 }
 
 body {
@@ -38,9 +34,9 @@ body {
 }
 
 :root {
-  @include mat.toolbar-overrides((
-    container-background-color: white,
-    container-text-color: #555555,
-    title-text-weight:bold
-  ));
+  @include mat.card-overrides((
+    title-text-weight:bold,
+    title-text-size: 14px,
+    title-text-line-height: 20px,
+    ));
 }

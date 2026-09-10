@@ -10,71 +10,43 @@
       Monthly Report
     </mat-panel-title>
     <mat-panel-description>
-      Click to view details
+      <mat-icon>expand_more</mat-icon>      
     </mat-panel-description>
   </mat-expansion-panel-header>
-  <mat-grid-list cols="4" rowHeight="4:1">
-    <mat-grid-tile>
-      <mat-card>
-        <mat-card-header>
-          <mat-card-title>Total Assets</mat-card-title>
-          <mat-card-subtitle>Overview</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-          <h2>4,125,698</h2>
-          <p>6.26% Increase vs last month</p>
-        </mat-card-content>
-        <mat-card-actions>
-          <button mat-button>View More</button>
-        </mat-card-actions>
-      </mat-card>
-    </mat-grid-tile>
-    <mat-grid-tile>
-      <mat-card>
-        <mat-card-header>
-          <mat-card-title>Total Assets</mat-card-title>
-          <mat-card-subtitle>Overview</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-          <h2>4,125,698</h2>
-          <p>6.26% Increase vs last month</p>
-        </mat-card-content>
-        <mat-card-actions>
-          <button mat-button>View More</button>
-        </mat-card-actions>
-      </mat-card>
-    </mat-grid-tile>
-    <mat-grid-tile>
-      <mat-card>
-        <mat-card-header>
-          <mat-card-title>Total Assets</mat-card-title>
-          <mat-card-subtitle>Overview</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-          <h2>4,125,698</h2>
-          <p>6.26% Increase vs last month</p>
-        </mat-card-content>
-        <mat-card-actions>
-          <button mat-button>View More</button>
-        </mat-card-actions>
-      </mat-card>
-    </mat-grid-tile>
-    <mat-grid-tile>
-      <mat-card>
-        <mat-card-header>
-          <mat-card-title>Total Assets</mat-card-title>
-          <mat-card-subtitle>Overview</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-          <h2>4,125,698</h2>
-          <p>6.26% Increase vs last month</p>
-        </mat-card-content>
-        <mat-card-actions>
-          <button mat-button>View More</button>
-        </mat-card-actions>
-      </mat-card>
-    </mat-grid-tile>
-  </mat-grid-list>
+  <!-- Place mat-card INSIDE the expansion panel body, not header -->
+  <div class="kpi-grid">
+    <mat-card class="kpi-card asserts">
+      <mat-card-title>Total Assets</mat-card-title>
+      <mat-card-content>
+        <h2>4,125,698</h2>
+        <small>6.26% Increase vs last month</small>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="kpi-card liabilities">
+      <mat-card-title>Total Liabilities</mat-card-title>
+      <mat-card-content>
+        <h2>4,125,698</h2>
+        <small>6.26% Increase vs last month</small>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="kpi-card net-worth">
+      <mat-card-title>Net Worth</mat-card-title>
+      <mat-card-content>
+        <h2>4,125,698</h2>
+        <small>6.26% Increase vs last month</small>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="kpi-card total-accounts">
+      <mat-card-title>Total Accounts</mat-card-title>
+      <mat-card-content>
+        <h2>4,125,698</h2>
+        <small>6.26% Increase vs last month</small>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </mat-expansion-panel>
 
 <div class="toolbar-space"></div>
