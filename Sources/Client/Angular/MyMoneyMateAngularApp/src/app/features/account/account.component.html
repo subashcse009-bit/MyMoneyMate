@@ -10,21 +10,26 @@
       Monthly Report
     </mat-panel-title>
     <mat-panel-description>
-      <mat-icon>expand_more</mat-icon>      
+      <mat-icon>expand_more</mat-icon>
     </mat-panel-description>
   </mat-expansion-panel-header>
   <!-- Place mat-card INSIDE the expansion panel body, not header -->
   <div class="kpi-grid">
     <mat-card class="kpi-card asserts">
-      <mat-card-title>Total Assets</mat-card-title>
-      <mat-card-content>
-        <h2>4,125,698</h2>
-        <small>6.26% Increase vs last month</small>
-      </mat-card-content>
+      <div fxLayout="row" fxLayoutGap="16px" fxLayoutAlign="start center">
+        <div fxFlex="20">
+          <mat-icon>account_balance</mat-icon>
+        </div>
+        <div fxFlex="80">
+          <mat-card-title>Total Assets</mat-card-title>
+          <mat-card-content>₹48,75,230</mat-card-content>
+        </div>
+      </div>
     </mat-card>
 
     <mat-card class="kpi-card liabilities">
       <mat-card-title>Total Liabilities</mat-card-title>
+      <mat-icon color="warn">credit_card</mat-icon>
       <mat-card-content>
         <h2>4,125,698</h2>
         <small>6.26% Increase vs last month</small>
@@ -33,6 +38,7 @@
 
     <mat-card class="kpi-card net-worth">
       <mat-card-title>Net Worth</mat-card-title>
+      <mat-icon color="accent">trending_up</mat-icon>
       <mat-card-content>
         <h2>4,125,698</h2>
         <small>6.26% Increase vs last month</small>
@@ -41,6 +47,7 @@
 
     <mat-card class="kpi-card total-accounts">
       <mat-card-title>Total Accounts</mat-card-title>
+      <mat-icon color="primary">account_balance_wallet</mat-icon>
       <mat-card-content>
         <h2>4,125,698</h2>
         <small>6.26% Increase vs last month</small>
