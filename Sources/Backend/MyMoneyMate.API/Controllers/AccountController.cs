@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MyMoneyMate.Application.Services;
+using MyMoneyMate.Infrastructure.Response;
 
 namespace MyMoneyMate.API.Controllers
 {
@@ -20,14 +21,14 @@ namespace MyMoneyMate.API.Controllers
         [HttpGet("GetList")]
         public async Task<IActionResult> GetList()
         {
-            var accounts = await _service.GetList();
+            var correlationId = HttpContext.TraceIdentifier;
 
-            _logger.LogInformation("Total Accounts");
+            var accounts = await _service.GetList();    
 
-            return Ok(new
-            {
-                Accounts = accounts
-            });
+            _logger.LogInformation("Total Accounts: {TotalAccounts}", accounts.Count());
+
+            return Ok(ResponseFactory.CreateSuccessResponse(accounts, "Accounts retrieved successfully", correlationId));
+
         }
     }
 }

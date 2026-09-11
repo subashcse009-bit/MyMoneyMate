@@ -15,7 +15,6 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import {MatExpansionModule} from '@angular/material/expansion';  
 import {MatGridListModule} from '@angular/material/grid-list';
-import { FlexLayoutModule } from 'ng-flex-layout';
 
 export interface Account {
   id: number;
@@ -46,8 +45,7 @@ export interface Account {
     MatDividerModule,
     MatToolbarModule,
     MatExpansionModule,
-    MatGridListModule,
-    FlexLayoutModule
+    MatGridListModule
   ],
   templateUrl: './account.component.html',
   styleUrl: './account.component.scss',
