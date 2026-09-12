@@ -15,5 +15,7 @@ namespace MyMoneyMate.Application.Repository.IRepository
         Task<IEnumerable<Account>> GetAllAsync();
 
         Task UpdateAccountCurrentBalanceAsync(Account account);
+
+        Task AddAsync(Account account);
     }
 }

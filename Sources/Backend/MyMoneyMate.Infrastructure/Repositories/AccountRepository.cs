@@ -17,6 +17,12 @@ namespace MyMoneyMate.Infrastructure.Repositories
             _context = context;
         }
 
+        public Task AddAsync(Account account)
+        {
+            _context.Accounts.Add(account);
+            return _context.SaveChangesAsync();
+        }
+
         public async Task<IEnumerable<Account>> GetAllAsync()
         {
             return await _context.Accounts.Where(a => a.StatusValue == "ACTV").ToListAsync();
