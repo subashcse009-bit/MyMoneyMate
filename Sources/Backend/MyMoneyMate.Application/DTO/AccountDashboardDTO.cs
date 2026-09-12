@@ -30,6 +30,7 @@ namespace MyMoneyMate.Infrastructure.Response
         public string AccountSideValue { get; set; }
         public int DisplayOrder { get; set; }
         public string? StatusValue { get; set; }
+        public DateTime LastTransactionDate {  get; set; }
     }
 
     public class AccountSummaryDTO

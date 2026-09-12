@@ -14,14 +14,16 @@ namespace MyMoneyMate.Application.Services
     {
         private readonly IAccountRepository _accountRepository;
         private readonly ICategoryRepository _categoryRepository;
+        private readonly ITransactionRepository _transactionRepository;
 
-        public AccountService(IAccountRepository accountRepository, ICategoryRepository categoryRepository)
+        public AccountService(IAccountRepository accountRepository, ICategoryRepository categoryRepository, ITransactionRepository transactionRepository)
         {
             _accountRepository = accountRepository;
             _categoryRepository = categoryRepository;
+            _transactionRepository = transactionRepository;
         }
 
-        public async Task<IEnumerable<Account>>  GetList()
+        public async Task<IEnumerable<Account>> GetList()
         {
             var accounts = await _accountRepository.GetAllAsync();
             return accounts;
@@ -52,9 +54,31 @@ namespace MyMoneyMate.Application.Services
 
         public async Task<AccountDashboardDTO> GetAccountDashboard()
         {
-            var dashboardData = new AccountDashboardDTO
-            { };
-            return dashboardData;
+            var accounts = await _accountRepository.GetAllAsync();
+            var summary = await GetAccountSummary(accounts);
+
+            AccountDashboardDTO accountDashboardDTO = new AccountDashboardDTO()
+            {
+                Summary = summary,
+                AccountDetails = accounts.Select(a => new AccountDetailsDTO
+                {
+                    AccountId = a.AccountId,
+                    AccountName = a.AccountName,
+                    AccountTypeValue = a.AccountTypeValue,
+                    CurrentBalance = a.CurrentBalance ?? 0,
+                    OpeningBalance = a.OpeningBalance,
+                    CreditLimit = a.CreditLimit,
+                    InterestRate = a.InterestRate,
+                    StartDate = a.StartDate,
+                    MaturityDate = a.MaturityDate,
+                    AccountSideValue = a.AccountSideValue,
+                    DisplayOrder = a.DisplayOrder,
+                    StatusValue = a.StatusValue,
+                    LastTransactionDate = DateTime.Now // Placeholder for last transaction date, you may want to fetch this from transactions
+                }).ToList(),
+            };
+
+            return accountDashboardDTO;
         }
 
         public async Task<Account> AddAccount(AddAccountDTO accountDto)
@@ -72,6 +96,21 @@ namespace MyMoneyMate.Application.Services
 
             await _accountRepository.AddAsync(account);
             return account;
+        }
+
+
+        private async Task<AccountSummaryDTO> GetAccountSummary(IEnumerable<Account> accounts)
+        {
+            var totalAccounts = accounts.Count();
+            var totalAssets = accounts.Where(a => a.AccountSideValue == "ASST").Sum(a => a.CurrentBalance ?? 0);
+            var totalLiabilities = accounts.Where(a => a.AccountSideValue == "LIAB").Sum(a => a.CurrentBalance ?? 0);
+            return new AccountSummaryDTO
+            {
+                TotalActiveAccounts = totalAccounts,
+                TotalAssets = totalAssets,
+                TotalLiabilities = totalLiabilities,
+                NetWorth = totalAssets - totalLiabilities
+            };
         }
     }
 }

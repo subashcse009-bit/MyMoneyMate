@@ -53,8 +53,10 @@ namespace MyMoneyMate.API.Controllers
         public async Task<IActionResult> AccountDashboard()
         {
             var correlationId = HttpContext.TraceIdentifier;
+
             var dashboardData = await _service.GetAccountDashboard();
-            _logger.LogInformation("Account dashboard data retrieved successfully");
+
+            _logger.LogInformation("Account dashboard data retrieved successfully. CorrelationId: {CorrelationId}", correlationId);
             return Ok(ResponseFactory.CreateSuccessResponse(dashboardData, "Account dashboard data retrieved successfully", correlationId));
         }
 

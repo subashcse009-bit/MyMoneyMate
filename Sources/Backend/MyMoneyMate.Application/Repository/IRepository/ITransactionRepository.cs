@@ -10,5 +10,6 @@ namespace MyMoneyMate.Application.Repository.IRepository
     public interface ITransactionRepository
     {
         Task SaveAsync(Transaction entity);
+        Task<DateTime?> GetLastTransactionDateByAccountIdAsync(int accountId);
     }
 }
