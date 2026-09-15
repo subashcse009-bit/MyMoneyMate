@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyMoneyMate.Domain
+namespace MyMoneyMate.Domain.Entities
 {
     //HDFC, SBI, Cash, Investment
     public class Account

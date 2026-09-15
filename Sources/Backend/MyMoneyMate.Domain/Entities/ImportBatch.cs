@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyMoneyMate.Domain
+namespace MyMoneyMate.Domain.Entities
 {
     using System.ComponentModel.DataAnnotations;
 

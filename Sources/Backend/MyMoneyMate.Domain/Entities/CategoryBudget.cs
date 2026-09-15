@@ -6,25 +6,34 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyMoneyMate.Domain
+namespace MyMoneyMate.Domain.Entities
 {
-    public class CodeValues
+    public class CategoryBudget
     {
         [Key]
-        public int CodeValueId { get; set; }
+        public int CategoryBudgetId { get; set; }
         
-        public int CodeId { get; set; }
+        public int CategoryId { get; set; }
         
-        public string CodeValue { get; set; }
+        [ForeignKey(nameof(CategoryId))]
+        public Category Category { get; set; }
+        
+        [Column(TypeName = "decimal(18,2)")]
+        public decimal BudgetAmount { get; set; }
         
         public string Description { get; set; }
+        
+        public string Notes { get; set; }
         
         [Column(TypeName = "date")]
         public DateOnly StartDate { get; set; }
         
-        [Column(TypeName = "date")]
-        
+        [Column(TypeName = "date")]        
         public DateOnly? EndDate { get; set; }
+        
+        public int? StatusId { get; set; }
+        
+        public string? StatusValue { get; set; }
         
         public string CreatedBy { get; set; }
         
@@ -35,5 +44,6 @@ namespace MyMoneyMate.Domain
         public DateTime ModifiedDate { get; set; }
         
         public int UpdateSeq { get; set; }
+
     }
 }

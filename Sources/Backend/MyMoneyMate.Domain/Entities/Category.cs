@@ -1,35 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyMoneyMate.Domain
+namespace MyMoneyMate.Domain.Entities
 {
-    public class CategoryBudget
+    //Rent, EMI,Loan
+    public class Category
     {
         [Key]
-        public int CategoryBudgetId { get; set; }
-        
         public int CategoryId { get; set; }
+       
+        public string CategoryName { get; set; }
         
-        [ForeignKey(nameof(CategoryId))]
-        public Category Category { get; set; }
+        //Need Savings, Want
+        public int? CategoryNatureId { get; set; }
         
-        [Column(TypeName = "decimal(18,2)")]
-        public decimal BudgetAmount { get; set; }
+        public string? CategoryNatureValue { get; set; }
         
-        public string Description { get; set; }
+        //Operating Expense,Investment
+        public int? CategoryGroupId { get; set; }
         
-        public string Notes { get; set; }
+        public string? CategoryGroupValue { get; set; }
         
-        [Column(TypeName = "date")]
-        public DateOnly StartDate { get; set; }
+        public bool IncludeExpense { get; set; }
         
-        [Column(TypeName = "date")]        
-        public DateOnly? EndDate { get; set; }
+        public bool IncludeIncome { get; set; }
+        
+        public bool IncludeSavings { get; set; }
+        
+        public int DisplayOrder { get; set; }
         
         public int? StatusId { get; set; }
         

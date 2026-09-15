@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Transactions;
 
-namespace MyMoneyMate.Domain
+namespace MyMoneyMate.Domain.Entities
 {
     public class Transaction
     {

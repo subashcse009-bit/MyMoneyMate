@@ -6,40 +6,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyMoneyMate.Domain
+namespace MyMoneyMate.Domain.Entities
 {
-    public class ScheduledExpense
+    public class InvestmentDetail
     {
         [Key]
-        public int ScheduledExpenseId { get; set; }
-       
-        public int ScheduledDay { get; set; }
+        public int InvestmentDetailId { get; set; }
         
-        public int AccountId { get; set; }
+        public int GoalId { get; set; }
         
-        [ForeignKey(nameof(AccountId))]
-        public Account Account { get; set; }
+        [ForeignKey(nameof(GoalId))]
+        public Goal Goal { get; set; }
+
+        // HDFC Flexi Cap Fund
+        public string InvestmentDetailName { get; set; }
         
-        public int CategoryId { get; set; }
+        public string Description { get; set; }
         
-        [ForeignKey(nameof(CategoryId))]
-        public Category Category { get; set; }
-        
-        [Column(TypeName = "decimal(18,2)")]
-        public decimal ExpenseAmount { get; set; }
-        
-        [Column(TypeName = "decimal(18,2)")]
-        public decimal IncomeAmount { get; set; }
+        public string Notes { get; set; }
         
         [Column(TypeName = "date")]
         public DateOnly StartDate { get; set; }
         
         [Column(TypeName = "date")]
         public DateOnly? EndDate { get; set; }
-        
-        public string Description { get; set; }
-        
-        public string Notes { get; set; }
         
         public int? StatusId { get; set; }
         
@@ -56,4 +46,3 @@ namespace MyMoneyMate.Domain
         public int UpdateSeq { get; set; }
     }
 }
-

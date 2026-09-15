@@ -1,29 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyMoneyMate.Domain
+namespace MyMoneyMate.Domain.Entities
 {
-    public class MonthlyPlan
+    public class Codes
     {
         [Key]
-        public int MonthlyPlanId { get; set; }
-        
-        public DateTime MonthDate {  get; set; }
-        
-        //Investment, Cash, Rent, Grocessory
-        public string PlanName { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int CodeId { get; set; }
+
+        public string Name { get; set; }
         
         public string Description { get; set; }
         
-        public string Notes { get; set; }
+        [Column(TypeName = "date")]
+        public DateOnly StartDate {  get; set; }
         
-        public int StatusId { get; set; }
-        
-        public string StatusValue { get; set; }
+        [Column(TypeName = "date")]
+        public DateOnly? EndDate { get; set; }
         
         public string CreatedBy { get; set; }
         
@@ -34,6 +33,5 @@ namespace MyMoneyMate.Domain
         public DateTime ModifiedDate { get; set; }
         
         public int UpdateSeq { get; set; }
-
     }
 }

@@ -6,36 +6,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyMoneyMate.Domain
+namespace MyMoneyMate.Domain.Entities
 {
-    //School Fees, Retirement, Home
-    public class Goal
+    public class CodeValues
     {
         [Key]
-        public int GoldId {  get; set; }
+        public int CodeValueId { get; set; }
         
-        public string GoalName {  get; set; }
+        public int CodeId { get; set; }
         
-        //Short-Term, Mid-Term, Long-Term
+        public string CodeValue { get; set; }
         
-        public int GoalTypeId { get; set; }
+        public string Description { get; set; }
         
-        public string GoalTypeValue { get; set; }
-        
-        public string Description {  get; set; }
-       
-        public string Notes { get; set; }
-        
-        [Column(TypeName = "date")]        
+        [Column(TypeName = "date")]
         public DateOnly StartDate { get; set; }
         
         [Column(TypeName = "date")]
         
         public DateOnly? EndDate { get; set; }
-        
-        public int? StatusId { get; set; }
-        
-        public string? StatusValue { get; set; }
         
         public string CreatedBy { get; set; }
         
