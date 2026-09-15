@@ -1,4 +1,4 @@
-﻿using MyMoneyMate.Application.DTO;
+﻿using MyMoneyMate.Domain.DTO;
 using MyMoneyMate.Application.Repository.IRepository;
 using System;
 using System.Collections.Generic;
@@ -17,7 +17,7 @@ namespace MyMoneyMate.Application.Import
             throw new NotImplementedException();
         }
 
-        public IEnumerable<TransactionImportRow> ReadTransactions(Stream stream)
+        public IEnumerable<TransactionImportRowDTO> ReadTransactions(Stream stream)
         {
            throw new NotImplementedException();
         }

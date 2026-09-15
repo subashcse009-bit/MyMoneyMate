@@ -1,4 +1,4 @@
-﻿using MyMoneyMate.Application.DTO;
+﻿using MyMoneyMate.Domain.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +10,6 @@ namespace MyMoneyMate.Application.Repository.IRepository
     public interface IImporter
     {
         bool CanImport(string fileName, string? contentType = null);
-        IEnumerable<TransactionImportRow> ReadTransactions(Stream stream);
+        IEnumerable<TransactionImportRowDTO> ReadTransactions(Stream stream);
     }
 }

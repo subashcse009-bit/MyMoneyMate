@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MyMoneyMate.Application.DTO;
+using MyMoneyMate.Domain.DTO;
 using MyMoneyMate.Application.Services;
 using MyMoneyMate.Domain;
 using MyMoneyMate.Infrastructure.Response;

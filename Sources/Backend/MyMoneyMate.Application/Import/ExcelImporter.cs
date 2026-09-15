@@ -1,4 +1,4 @@
-﻿using MyMoneyMate.Application.DTO;
+﻿using MyMoneyMate.Domain.DTO;
 using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
@@ -20,16 +20,16 @@ namespace MyMoneyMate.Application.Import
                    (contentType != null && contentType.Contains("spreadsheet"));
         }
 
-        public IEnumerable<TransactionImportRow> ReadTransactions(Stream stream)
+        public IEnumerable<TransactionImportRowDTO> ReadTransactions(Stream stream)
         {
-            var rows = new List<TransactionImportRow>();
+            var rows = new List<TransactionImportRowDTO>();
             using var package = new ExcelPackage(stream);
             var sheet = package.Workbook.Worksheets[0];
             var rowCount = sheet.Dimension.Rows;
 
             for (int row = 2; row <= rowCount; row++)
             {
-                rows.Add(new TransactionImportRow
+                rows.Add(new TransactionImportRowDTO
                 {
                     TransactionDate = DateTime.TryParse(sheet.Cells[row, 1].Text, out var transactionDate) ? transactionDate : DateTime.MinValue,
                     Account = sheet.Cells[row, 2].Text,
