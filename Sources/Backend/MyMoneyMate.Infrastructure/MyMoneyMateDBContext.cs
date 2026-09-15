@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MyMoneyMate.Domain.DTO;
 using MyMoneyMate.Domain.Entities;
 
 namespace MyMoneyMate.Infrastructure

@@ -1,4 +1,5 @@
-﻿using MyMoneyMate.Domain.Entities;
+﻿using MyMoneyMate.Domain.DTO;
+using MyMoneyMate.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,5 +18,7 @@ namespace MyMoneyMate.Application.Repository.IRepository
         Task UpdateAccountCurrentBalanceAsync(Account account);
 
         Task AddAsync(Account account);
+
+        Task<IEnumerable<AssertsAllocationDTO>> GetAssertsAllocations();
     }
 }

@@ -55,6 +55,8 @@ namespace MyMoneyMate.Application.Services
         {
             var accounts = await _accountRepository.GetAllAsync();
             var summary = await GetAccountSummary(accounts);
+            var assertsAllocation = await _accountRepository.GetAssertsAllocations();
+
 
             AccountDashboardDTO accountDashboardDTO = new AccountDashboardDTO()
             {
@@ -75,6 +77,7 @@ namespace MyMoneyMate.Application.Services
                     StatusValue = a.StatusValue,
                     LastTransactionDate = DateTime.Now // Placeholder for last transaction date, you may want to fetch this from transactions
                 }).ToList(),
+                AssertsAllocations = assertsAllocation
             };
 
             return accountDashboardDTO;
@@ -97,7 +100,7 @@ namespace MyMoneyMate.Application.Services
             return account;
         }
 
-
+        #region Private Methods
         private async Task<AccountSummaryDTO> GetAccountSummary(IEnumerable<Account> accounts)
         {
             var totalAccounts = accounts.Count();
@@ -111,5 +114,6 @@ namespace MyMoneyMate.Application.Services
                 NetWorth = totalAssets - totalLiabilities
             };
         }
+        #endregion
     }
 }

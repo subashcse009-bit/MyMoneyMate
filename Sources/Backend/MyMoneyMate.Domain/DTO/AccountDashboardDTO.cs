@@ -12,7 +12,7 @@ namespace MyMoneyMate.Domain.DTO
         public List<AccountDetailsDTO> AccountDetails { get; set; }
         public List<NetworthTrendDTO> NetWorthTrends { get; set; }
         public List<AccountTypeSummaryDTO> AccountTypeSummaries { get; set; }
-        public List<AssertsAllocationDTO> AssertsAllocations { get; set; }
+        public IEnumerable<AssertsAllocationDTO> AssertsAllocations { get; set; }
     }
 
     public class AccountDetailsDTO
