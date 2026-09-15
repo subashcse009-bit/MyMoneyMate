@@ -1,7 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using MyMoneyMate.Application.Repository.IRepository;
-using MyMoneyMate.Domain;
+using MyMoneyMate.Domain.Entities;
 using MyMoneyMate.Infrastructure.Data;
 using System;
 using System.Collections.Generic;

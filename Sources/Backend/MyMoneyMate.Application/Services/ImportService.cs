@@ -1,5 +1,5 @@
 ﻿using MyMoneyMate.Application.Repository.IRepository;
-using MyMoneyMate.Domain;
+using MyMoneyMate.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
